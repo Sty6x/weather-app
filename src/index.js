@@ -1,7 +1,17 @@
 import './style.css';
-console.log('present')
-console.log('hey')
+import * as DropDown from './dropDown'
+
 const body = document.querySelector('body')
-const header = document.createElement('h1')
-header.textContent = ' HEY HOY'
-body.appendChild(header)
+const nav = document.querySelector('nav')
+const main = document.querySelector('main')
+const btn = document.createElement('button')
+
+btn.textContent = 'Trigger'
+btn.setAttribute('id', 'trigger-finger')
+nav.appendChild(btn);
+
+body.addEventListener('click', e => {
+  const target = e.target
+  DropDown.dropDown(target, 'drop-down-list', '#drop-down-title')
+})
+
