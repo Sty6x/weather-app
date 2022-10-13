@@ -13,7 +13,7 @@ nav.appendChild(btn);
 
 const menuList = document.getElementById('drop-down-list')
 
-DropDown.setInitClass(menuList)
+DropDown.setDDClass(menuList)
 
 body.addEventListener('click', e => {
   const target = e.target
