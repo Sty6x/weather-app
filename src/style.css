@@ -61,10 +61,12 @@ nav{
 #drop-down-title{
   cursor: pointer;
 }
+
 #drop-down-title-cont{
   z-index:999;
   background-color:white ;
 }
+
 #drop-down-cont{
   display: flex;
   flex-direction: column;
@@ -85,8 +87,6 @@ nav{
 }
 
 .menu-inactive{
-  position: relative;
-  z-index: 1;
   transform:translate(0,-30%);
   transition:transform 200ms ease;
   animation: 100ms menu-fade-out ease;
