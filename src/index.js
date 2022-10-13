@@ -10,8 +10,13 @@ btn.textContent = 'Trigger'
 btn.setAttribute('id', 'trigger-finger')
 nav.appendChild(btn);
 
+
+const menuList = document.getElementById('drop-down-list')
+
+DropDown.setInitClass(menuList)
+
 body.addEventListener('click', e => {
   const target = e.target
-  DropDown.dropDown(target, 'drop-down-list', '#drop-down-title')
+  DropDown.dropDown(target, menuList, '#drop-down-title')
 })
 

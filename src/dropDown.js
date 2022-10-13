@@ -20,32 +20,37 @@ const inactiveMenu = {
   opacity: '0'
 }
 
+function appendStyles(node, obj) {
+  Object.assign(node.style, obj)
+}
+
+export function setInitClass(list) {
+  list.classList.add('inactive-menu')
+}
+
 export function changeInactive(list) {
-  if (list.classlist.contains('active-menu')) {
-    list.classList.remove('inactive-menu')
-    list.setattribute('class', 'inactive-menu')
+  if (list.classList.contains('active-menu')) {
+    list.classList.remove('active-menu')
+    list.setAttribute('class', 'inactive-menu')
+    appendStyles(list, inactiveMenu)
   }
+
 }
 export function changeActive(list) {
-  if (list.classlist.contains('active-menu')) {
-    list.classList.remove('active-menu')
-    list.setattribute('class', 'inactive-menu')
+  if (list.classList.contains('inactive-menu')) {
+    list.classList.remove('inactive-menu')
+    list.setAttribute('class', 'active-menu')
+    appendStyles(list, activeMenu)
   }
 }
 
 export function dropDown(target, list, trigger) {
-  const menuList = document.getElementById(list)
-  menuList.setAttribute('class', 'inactive-menu')
-  if (target.matches('li')) {
-    target.setAttribute('style', 'background-color:blue;')
-  }
+  console.log(list)
   if (target.matches(trigger)) {
-    if (menuList.classList.contains('menu-inactive')) {
-      menuList.classList.remove('menu-inactive')
-      menuList.classList.add('menu-active')
-    } else if (menuList.classList.contains('menu-active')) {
-      menuList.classList.remove('menu-active')
-      menuList.classList.add('menu-inactive')
+    if (list.classList.contains('inactive-menu')) {
+      changeActive(list)
+    } else if (list.classList.contains('active-menu')) {
+      changeInactive(list)
     }
   }
 
