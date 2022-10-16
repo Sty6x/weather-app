@@ -1,6 +1,42 @@
 console.log('drop down initialize');
-// first argument will be the event target provided by the user
-// second argument should be the menu list or the list that the use
+const style = document.createElement('style');
+const head = document.querySelector('head')
+const styleSheetKeyFrames = '\
+@keyframes menu-fade-out{ \
+  0%{\
+    opacity:1; \
+   }\
+  50%{\
+    opacity:.5;\
+   }\
+  100%{\
+    opacity:0;\
+   }\
+  }\
+  \
+  @keyframes menu-fade-in{\
+  0%{\
+    opacity:0;\
+   }\
+  25%{\
+    opacity:.3;\
+   }\
+  50%{\
+    opacity:.5;\
+   }\
+  75%{\
+    opacity:.7;\
+   }\
+  100%{\
+    opacity:1;\
+   }\
+  }\
+'
+head.after(head.children[head.children.length -1 ], style)
+style.innerHTML = styleSheetKeyFrames;
+
+// first argument will be the event target 
+// second argument should be the menu list or the list that the user
 // wants to animate
 // third argument is the trigger, it needs to be specific,
 // this will need a query selector

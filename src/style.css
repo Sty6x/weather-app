@@ -93,9 +93,9 @@ nav{
   opacity:0
 }
 
-@keyframes menu-fade-out{
+/* @keyframes menu-fade-out{
 0%{
-  opacity:1;
+  opacity:1; 
  }
 50%{
   opacity:.5;
@@ -122,4 +122,4 @@ nav{
 100%{
   opacity:1;
  }
-}
+} */
