@@ -1,5 +1,7 @@
 import './style.css';
-import * as DropDown from './dropDown'
+// import * as DropDown from './dropDown'
+import { dropDown,setDDClass } from '@sty6x/drop-down-menu';
+
 
 const body = document.querySelector('body')
 const nav = document.querySelector('nav')
@@ -13,10 +15,10 @@ btn.setAttribute('id', 'trigger-finger')
 
 const menuList = document.getElementById('drop-down-list')
 
-DropDown.setDDClass(menuList)
+setDDClass(menuList)
 
 body.addEventListener('click', e => {
   const target = e.target
-  DropDown.dropDown(target, menuList, '#drop-down-title')
+dropDown(target, menuList, '#drop-down-title')
 })
 
