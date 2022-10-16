@@ -53,7 +53,7 @@ main{
 }
 nav{
   display: flex;
-  justify-content:space-between;
+  justify-content:center;
   text-align: center;
   padding:20px 30px;
 }
@@ -79,7 +79,9 @@ nav{
   gap: 15px;
 
 }
-.menu-active{
+
+
+/* .menu-active{
   position: relative;
   transform: translate(0,15%);
   transition:transform 200ms ease;
@@ -91,7 +93,7 @@ nav{
   transition:transform 200ms ease;
   animation: 100ms menu-fade-out ease;
   opacity:0
-}
+} */
 
 /* @keyframes menu-fade-out{
 0%{

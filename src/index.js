@@ -8,7 +8,7 @@ const btn = document.createElement('button')
 
 btn.textContent = 'Trigger'
 btn.setAttribute('id', 'trigger-finger')
-nav.appendChild(btn);
+// nav.appendChild(btn);
 
 
 const menuList = document.getElementById('drop-down-list')
