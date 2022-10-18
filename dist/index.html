@@ -3,29 +3,32 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Test Development</title>
 <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script></head>
-
-<body>
-  <header>
-    <nav>
-      <div id="drop-down-cont">
-        <div id='drop-down-title-cont'>
-          <h2 id="drop-down-title">Drop Down Menu</h2>
+<header>
+</header>
+<main>
+  <div>
+    <h2>main contents</h2>
+  </div>
+  <nav>
+    <div id="rudder-container">
+      <ul id="rudder-item-list" class="rudder-active">
+        <div id="left-rud-item" class='left-rud-active'>
+          <li></li>
+          <li></li>
         </div>
-        <ul id="drop-down-list">
-          <li>Shoes</li>
-          <li>Clothes</li>
-          <li>Accessories</li>
-          <li>and</li>
-          <li>we're</li>
-          <li>falling</li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main>
-  </main>
+        <li id="main-item"></li>
+        <div id="right-rud-item" class='right-rud-active'>
+          <li></li>
+          <li></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+</main>
 </body>
 
 </html>
