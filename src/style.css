@@ -131,8 +131,9 @@ nav{
 
 
 #right-rud-item>li, #left-rud-item>li{
-  background-image:url('./resources/img/home.png');
+background-image:url('./resources/img/compass (1).png');
 }
+
 
 .left-rud-active>li,.right-rud-active>li{
   width: 30px;
@@ -142,7 +143,7 @@ nav{
   animation-name: expand-item;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
-  animation-delay:200ms;
+  /* animation-delay:100ms; */
 }
 
 /* this is for container */
