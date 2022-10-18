@@ -19,7 +19,6 @@ export function createNav(container) {
   rudderItemList.append(leftRudItem, mainItmLi, rightRudItem)
   rudderContainer.appendChild(rudderItemList)
   container.appendChild(rudderContainer)
-  console.log(container)
   applyIDClassAttr()
 }
 
@@ -51,7 +50,7 @@ function applyIDClassAttr() {
 // the this module will create a rudder navigation once the
 // create nav is invoked
 
-function rudderAnimation(target) {
+export function rudderAnimation(target) {
   if (target.matches('li')) {
     if (!rudderItemList.classList.contains('rudder-inactive')) {
 
