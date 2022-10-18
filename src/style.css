@@ -130,10 +130,19 @@ nav{
 }
 
 
-#right-rud-item>li, #left-rud-item>li{
-background-image:url('./resources/img/compass (1).png');
+#loc{
+  background-image:url('./resources/img/compass (1).png');
+}
+#msg{
+  background-image:url('./resources/img/chat.png');
 }
 
+#user{
+  background-image:url('./resources/img/user.png');
+}
+#settings{
+  background-image:url('./resources/img/settings.png');
+}
 
 .left-rud-active>li,.right-rud-active>li{
   width: 30px;
@@ -143,7 +152,6 @@ background-image:url('./resources/img/compass (1).png');
   animation-name: expand-item;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
-  /* animation-delay:100ms; */
 }
 
 /* this is for container */
@@ -156,9 +164,10 @@ background-image:url('./resources/img/compass (1).png');
   display: flex;
   align-items: center;
   padding:20px 35px;
+  transition:padding 100ms ease-in ;
   border-radius:40px;
   animation-name: expand-nav;
-  animation-duration: 200ms;
+  animation-duration: 300ms;
   animation-fill-mode: forwards; 
 }
 
@@ -167,7 +176,7 @@ background-image:url('./resources/img/compass (1).png');
   animation-name: compress-nav;
   animation-duration: 200ms;
   animation-fill-mode: forwards;
-  transition:padding 150ms ease-in ;
+  transition:padding 100ms ease-in ;
   padding: 20px 20px;
   border-radius: 40px;
 }
