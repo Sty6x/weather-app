@@ -9,32 +9,19 @@ search.setAttribute('type', 'text')
 btn.textContent = 'Get Image'
 main.append(btn, search)
 
-function getImg() {
-  return fetch(`https://api.giphy.com/v1/gifs/translate?api_key=6C6Bv7RmIvF06uPUz6RVMaQgiWxSQiKd&s=${search.value}`, { mode: 'cors' })
-    .then((response) => {
-      console.log(response.blob())
-      return response.json();
-    }).then((response) => {
-      image.src = response.data.images.original.url
-    }).catch(() => {
-      console.log("images doesn't exist")
-      return fetch(`https://api.giphy.com/v1/gifs/translate?api_key=6C6Bv7RmIvF06uPUz6RVMaQgiWxSQiKd&s=nothing`, { mode: 'cors' })
-        .then(errorImg => {
-          return errorImg.json();
-        }).then(errorImg => {
-          image.src = errorImg.data.images.original.url
-        }).catch(e => {
-          console.log(e)
-          console.log('default image doesnt exist')
-        })
-    })
+
+async function getImg() {
+  try {
+    const grabImage = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=6C6Bv7RmIvF06uPUz6RVMaQgiWxSQiKd&s=${search.value}`, { mode: 'cors' })
+    const extractBody = await grabImage.json()
+    image.src = extractBody.data.images.original.url
+  }
+  catch (e) {
+    console.log(e)
+    const grabErrImage = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=6C6Bv7RmIvF06uPUz6RVMaQgiWxSQiKd&s=nothing`, { mode: 'cors' })
+    const extractErrBody = await grabErrImage.json()
+    image.src = extractErrBody.data.images.original.url
+  }
 }
-function test() {
-  return fetch(`https://api.giphy.com/v1/gifs/translate?api_key=6C6Bv7RmIvF06uPUz6RVMaQgiWxSQiKd&s=${search.value}`, { mode: 'cors' })
-    .then((response) => {
-      console.log(response.text())
-      // return response.blob()
-    })
-}
-test()
+
 btn.addEventListener('click', getImg)
