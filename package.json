@@ -1,8 +1,7 @@
 {
-  "name": "test-development",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "Repository for testing out different functionalities, css animations, and other stuff for testing",
-  "private": true,
+  "description": "Weather App using Promises, Async/Await and Fetch",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
@@ -11,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sty6x/test-development.git"
+    "url": "git+https://github.com/Sty6x/weather-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sty6x/test-development/issues"
+    "url": "https://github.com/Sty6x/weather-app/issues"
   },
-  "homepage": "https://github.com/Sty6x/test-development#readme",
+  "homepage": "https://github.com/Sty6x/weather-app#readme",
   "devDependencies": {
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
