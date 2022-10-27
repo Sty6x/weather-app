@@ -18,6 +18,7 @@ main.addEventListener('click', e => {
   const target = e.target;
   if (target.matches('#temperature')) {
     changeTempClass(target)
+    Display.convertTemp(target)
   }
 })
 

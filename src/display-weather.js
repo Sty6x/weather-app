@@ -3,15 +3,16 @@ const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
 const minTemp = document.getElementById('min-temp')
 const maxTemp = document.getElementById('max-temp')
+const temps = [temp, maxTemp, minTemp]
 
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
     city.textContent = weatherData.city;
-    temp.textContent = `${weatherData.temperature}°`;
     desc.textContent = weatherData.desc;
-    maxTemp.textContent = `${weatherData.maxTemp}°`;
-    minTemp.textContent = `${weatherData.minTemp}°`;
+    temp.textContent = `${Math.round(weatherData.temperature)}°`;
+    maxTemp.textContent = `${Math.round(weatherData.maxTemp)}°`;
+    minTemp.textContent = `${Math.round(weatherData.minTemp)}°`;
 
   } catch (error) {
     console.log(error)
@@ -19,12 +20,19 @@ export async function displayWeather(dataObj, input) {
   }
 }
 // triggers if either to celcius or to farenheit is active
-function convertTemp(temp) {
-  if (convert.classList.contans('isF')) {
-    const f = (temp * 1.8) + 32;
-    return f
-  } else {
-    const c = (temp - 32) * .5 / 9
-    return c
-  }
+// triggers on class change
+export function convertTemp(target) {
+  temps.forEach(temp => {
+    let t;
+    const nSymbol = temp.textContent.slice(0, temp.textContent.length - 1)
+    if (!target.classList.contains('isC')) {
+      console.log('to farenheit')
+      t = nSymbol * (9 / 5) + 32
+      temp.textContent = t + '°'
+    } else {
+      console.log('to celsius')
+      t = 5 / 9 * (nSymbol - 32)
+      temp.textContent = Math.round(t) + '°'
+    }
+  });
 }
