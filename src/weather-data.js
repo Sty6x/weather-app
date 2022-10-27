@@ -1,8 +1,8 @@
 async function getGeoCode(input) {
   const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=1&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
-  const { lat, lon } = geoCodeData[0];
-  return { lat: lat, lon: lon }
+  const { name, lat, lon } = geoCodeData[0];
+  return { name: name, lat: lat, lon: lon }
 }
 
 export async function getWeather(input) {
@@ -16,10 +16,9 @@ export async function getWeather(input) {
       const geoLocation = await getGeoCode(input)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      const cityName = input.value.charAt(0).toUpperCase().concat('', input.value.slice(1))
       const { main: { temp, temp_max, temp_min, humidity, feels_like }, sys: { country }, weather: [{ main, description }] } = weatherData
       return {
-        city: cityName,
+        city: geoLocation.name,
         country: country,
         temperature: temp,
         minTemp: temp_min,
@@ -33,9 +32,8 @@ export async function getWeather(input) {
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${input.lat}&lon=${input.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
       const { main: { temp, temp_max, temp_min, humidity, feels_like }, name, sys: { country }, weather: [{ main, description }] } = weatherData
-      const cityName = name.charAt(0).toUpperCase().concat('', name.slice(1))
       return {
-        city: cityName,
+        city: name,
         country: country,
         temperature: temp,
         minTemp: temp_min,
