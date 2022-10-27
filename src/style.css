@@ -66,6 +66,7 @@ body{
 main{
   display: flex;  
   align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
   flex-direction: column;
@@ -117,3 +118,5 @@ header{
   display: flex;
   gap:10px;
 }
+
+
