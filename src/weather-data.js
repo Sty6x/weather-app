@@ -51,3 +51,19 @@ export async function getWeather(input) {
   }
 }
 
+function defaultErrorLoc(err, Display) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+  Display.displayWeather(getWeather, { lat: 40.730610, lon: -73.935242 })
+}
+export function userCurrentWeather(Display) {
+  return navigator.geolocation.getCurrentPosition(async function(pos) {
+    const position = pos.coords // geocode name passed into getWeather
+    const { latitude, longitude } = position
+    Display.displayWeather(getWeather, { lat: latitude, lon: longitude })
+  }, err => {
+    defaultErrorLoc(err, Display)
+  })
+}
+
+
+
