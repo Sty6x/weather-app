@@ -26,11 +26,9 @@ export function convertTemp(target) {
     let t;
     const nSymbol = temp.textContent.slice(0, temp.textContent.length - 1)
     if (!target.classList.contains('isC')) {
-      console.log('to farenheit')
       t = nSymbol * (9 / 5) + 32
-      temp.textContent = t + '°'
+      temp.textContent = Math.round(t) + '°'
     } else {
-      console.log('to celsius')
       t = 5 / 9 * (nSymbol - 32)
       temp.textContent = Math.round(t) + '°'
     }

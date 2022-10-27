@@ -58,7 +58,17 @@ url('./resources/woff-fonts/Poppins-SemiBold.woff') format('woff'),
 url('./resources/woff-fonts/Poppins-Bold.woff') format('woff'),
 url('./resources/woff-fonts/Poppins-Medium.woff') format('woff');
 }
-
+:root{
+  --jet: #3A3844ff;
+--eggplant: #513E49ff;
+--rhythm: #696F8Fff;
+--blue-yonder: #647598ff;
+--thistle: #BFB0C4ff;
+--eggplant-2: #54404Cff;
+--eggplant-3: #6C4A56ff;
+--eggplant-4: #5A414Cff;
+--mauve-taupe: #7E5867ff;
+}
 body{
   overflow: hidden;
   font-family: 'Poppins';
@@ -70,7 +80,7 @@ main{
   height: 100%;
   width: 100%;
   flex-direction: column;
-  background-color: salmon;
+  background-color: var(--jet);
 }
 form{
   display: flex;  
@@ -119,4 +129,9 @@ header{
   gap:10px;
 }
 
-
+#weather-cont{
+  padding: 2.5em 3.5em;
+  background-color: var(--blue-yonder);
+  width: 50%;
+  height: 70%;
+}
