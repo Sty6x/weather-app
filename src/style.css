@@ -46,7 +46,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+a{
+ text-decoration: none; 
+  color: black;
+}
 
 @font-face{
   font-family: 'Poppins';
@@ -78,6 +81,7 @@ form{
 header{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   outline: red 1px solid;
   padding:10px 20px;
 }
@@ -88,3 +92,13 @@ header{
   font-size: 1.2rem;
 }
 
+#github-cont{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#git-img{
+  height: 30px;
+  width: 30px;
+}
