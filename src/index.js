@@ -34,8 +34,8 @@ btn.addEventListener('click', () => {
 async function getGeoCode(input) {
   const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=1&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
-  const { country, lat, lon, name } = geoCodeData[0];
-  return { country: country, lat: lat, lon: lon, name: name }
+  const { lat, lon } = geoCodeData[0];
+  return { lat: lat, lon: lon }
 }
 
 
@@ -43,13 +43,23 @@ async function getWeather(geo, input) {
   const geoLocation = await geo(input)
   const weatherRespoonse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const weatherData = await weatherRespoonse.json()
-  const { main: { temp } } = weatherData
-  console.log(geoLocation)
-  console.log(weatherData)
-  console.log(temp)
-}
-getWeather(getGeoCode, 'bacolod')
+  const { main: { temp, temp_max, temp_min, humidity, feels_like }, name, sys: { country }, weather: [{ main, description }] } = weatherData
+  return {
+    city: input,
+    country: country,
+    temperature: temp,
+    minTemp: temp_min,
+    maxTemp: temp_max,
+    humidity: humidity,
+    feelsLike: feels_like,
+    mainWeather: main,
+    desc: description
 
+  }
+}
+const weather = getWeather(getGeoCode, 'dubai').then(response => {
+  console.log(response)
+})
 form.addEventListener('submit', e => {
   e.preventDefault()
 })
