@@ -5,12 +5,14 @@ async function getGeoCode(input) {
   return { lat: lat, lon: lon }
 }
 
-
 export async function getWeather(input) {
   const isDOM = el => el instanceof Element
   try {
+    // checking if input is element or object
+    // so i'd be able to pass in an object instead of element
+    // to test out different locations by passing in a different value
+    // in lat and lon in the api url
     if (isDOM(input)) {
-      console.log('has value property')
       const geoLocation = await getGeoCode(input)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
@@ -28,7 +30,6 @@ export async function getWeather(input) {
         desc: description
       }
     } else {
-      console.log('no property called value')
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${input.lat}&lon=${input.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
       const { main: { temp, temp_max, temp_min, humidity, feels_like }, name, sys: { country }, weather: [{ main, description }] } = weatherData
