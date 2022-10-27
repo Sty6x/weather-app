@@ -65,4 +65,12 @@ export function userCurrentWeather(Display) {
 }
 
 
+export async function getHoursForecast(input) {
+  const geoCode = await getGeoCode(input)
+  const forecastResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${geoCode.lat}&longitude=${geoCode.lon}&hourly=temperature_2m`)
+  const forecastData = await forecastResponse.json()
+  const { hourly: { time, temperature_2m } } = forecastData;
+  return { time: time, temp: temperature_2m }
+}
+
 
