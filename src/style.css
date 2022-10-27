@@ -65,11 +65,11 @@ body{
 }
 main{
   display: flex;  
-  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   flex-direction: column;
+  background-color: salmon;
 }
 form{
   display: flex;  
@@ -86,7 +86,6 @@ header{
   padding:10px 20px;
 }
 
-
 #logo{
   font-weight: bold;
   font-size: 1.2rem;
@@ -101,4 +100,20 @@ header{
 #git-img{
   height: 30px;
   width: 30px;
+}
+
+#imp-details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#temperature{
+  font-size: 5rem;
+}
+
+
+#min-max-temp{
+  display: flex;
+  gap:10px;
 }

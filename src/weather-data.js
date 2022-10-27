@@ -26,6 +26,7 @@ export async function getWeather(input) {
       desc: description
     }
   } catch (e) {
+    console.log(e)
     console.log('City Doesnt Exist')
   }
 }

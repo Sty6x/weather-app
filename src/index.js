@@ -1,17 +1,14 @@
 import './style.css'
 import * as Weather from './weather-data.js'
+import * as Display from './display-weather.js'
 
-const form = document.querySelector('form')
 const userInput = document.querySelector('input')
-const btn = document.querySelector('button')
+const btn = document.getElementById('search')
+const triggers = ['click', 'keypress']
 
 
-// btn.addEventListener('click', () => {
-//   Weather.getWeather(userInput).then(response => {
-//     console.table(response)
-//   })
-// })
-
-// form.addEventListener('submit', e => {
-//   e.preventDefault()
-// })
+userInput.addEventListener('keypress', e => {
+  if (e.key == 'Enter') {
+    Display.displayWeather(Weather.getWeather, userInput)
+  }
+})
