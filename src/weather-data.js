@@ -10,7 +10,7 @@ async function getGeoCode(input) {
 export async function getWeather(input) {
   try {
     const geoLocation = await getGeoCode(input)
-    const weatherRespoonse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
+    const weatherRespoonse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
     const weatherData = await weatherRespoonse.json()
     const cityName = input.value.charAt(0).toUpperCase().concat('', input.value.slice(1))
     const { main: { temp, temp_max, temp_min, humidity, feels_like }, sys: { country }, weather: [{ main, description }] } = weatherData
