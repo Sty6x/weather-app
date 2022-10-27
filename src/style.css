@@ -48,6 +48,18 @@ table {
 }
 
 
+@font-face{
+  font-family: 'Poppins';
+  src: url('./resources/woff-fonts/Poppins-Regular.woff') format('woff'),
+url('./resources/woff-fonts/Poppins-SemiBold.woff') format('woff'),
+url('./resources/woff-fonts/Poppins-Bold.woff') format('woff'),
+url('./resources/woff-fonts/Poppins-Medium.woff') format('woff');
+}
+
+body{
+  overflow: hidden;
+  font-family: 'Poppins';
+}
 main{
   display: flex;  
   justify-content: center;
@@ -57,11 +69,22 @@ main{
   flex-direction: column;
 }
 form{
-
   display: flex;  
   flex-direction: column;
   box-sizing: border-box;
   gap: 15px;
 }
 
+header{
+  display: flex;
+  justify-content: space-between;
+  outline: red 1px solid;
+  padding:10px 20px;
+}
+
+
+#logo{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
