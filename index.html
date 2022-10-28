@@ -12,17 +12,54 @@
   <div id="search-cont">
     <input type="search" placeholder="Type in Your City" name="srch" id="srch" value="">
   </div>
-  <div id="github-cont">
-    <img src="648e666260ca9d409a49.png" alt="">
+  <a id="github-cont" href="#">
+    <img id='git-img' src="648e666260ca9d409a49.png" alt="">
     <p>GitHub</p>
-  </div>
+  </a>
 </header>
 <main>
-  <!-- <form> -->
-  <!--   <label for='usr-input'> City -->
-  <!--     <input type='text' id='usr-input' name='input'></label> -->
-  <!--   <button type='submit'> Submit entry </button> -->
-  <!-- </form> -->
+  <div id="weather-cont">
+    <div id="current-cont">
+      <div id="detail-curr-cont">
+        <div id="imp-details">
+          <h2 id="city"></h2>
+          <h3 id="temperature" class="isC"></h3>
+          <p id="description"></p>
+          <div id="min-max-temp">
+            <p id="max-temp"></p>
+            <p id="min-temp"></p>
+          </div>
+        </div>
+        <div id="upper-extra-inf">
+          <p id="inf-2">something in here:<span>icon 123</span> </p>
+          <p id="inf-0">something in here:<span>icon 123</span> </p>
+          <p id="inf-1">something in here:<span>icon 123</span> </p>
+        </div>
+        <div id="lower-extra-inf">
+          <p id="low-inf-0">Wind Direction:<span id="low-inf-0-val">icon 123</span></p>
+          <p id="low-inf-1">Wind Speed:<span id="low-inf-1-val">icon 123</span></p>
+        </div>
+      </div>
+      <div id="current-hourly-chart">
+      </div>
+    </div>
+    <div id="daily">
+      <ul id="daily-list-cont">
+        <li class="cards">
+          <h4>Wed</h4>
+          <p id="wed-temp">38C</p>
+          <div>
+          </div>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
 </main>
 </body>
 
