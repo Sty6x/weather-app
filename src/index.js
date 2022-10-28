@@ -29,9 +29,9 @@ userInput.addEventListener('keypress', e => {
   if (e.key == 'Enter') {
     // need to reset or else converts it from celcius to celcius
     temperatureHead.setAttribute('class', 'isC')
-    Display.displayWeather(Weather.getWeather, userInput)
-    Weather.getHoursForecast(userInput)
-    Weather.getExtForecastHours(7, userInput)
+    Display.displayWeather(Weather.getCurrentWeather, userInput)
+    Weather.getHourlyForecast(userInput)
+    Weather.getDailyForecast(userInput)
   }
 })
 
