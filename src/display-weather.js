@@ -3,17 +3,29 @@ const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
 const minTemp = document.getElementById('min-temp')
 const maxTemp = document.getElementById('max-temp')
+const press = document.getElementById('inf-0')
+const humid = document.getElementById('inf-1')
+const feelsLike = document.getElementById('inf-2')
+const deg = document.getElementById('low-inf-0-val')
+const spd = document.getElementById('low-inf-1-val')
 const temps = [temp, maxTemp, minTemp]
 
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
     console.log(weatherData)
-    city.textContent = weatherData.city;
+    city.textContent = `${weatherData.city}, ${weatherData.country}`;
     desc.textContent = weatherData.desc;
     temp.textContent = `${Math.round(weatherData.temperature)}°`;
     maxTemp.textContent = `${Math.round(weatherData.maxTemp)}°`;
     minTemp.textContent = `${Math.round(weatherData.minTemp)}°`;
+    press.textContent = `Pressure: ${weatherData.pressure}`
+    humid.textContent = `Humidity: ${weatherData.humidity}%`
+    feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
+    spd.textContent = weatherData.windSpd
+    // spdName.textContent = `Speed:`
+    deg.textContent = `${weatherData.windDeg}°`;
+    // degName.textContent = `Degrees:`
 
   } catch (error) {
     console.log(error)

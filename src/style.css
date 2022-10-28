@@ -174,7 +174,7 @@ p#description{
   display: flex;
   flex-direction: column;
   font-size: 1.2rem;
-  gap: 10px;
+  gap: 25px;
 }
 #lower-extra-inf{
   display: flex;

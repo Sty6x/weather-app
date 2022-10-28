@@ -17,22 +17,25 @@ export async function getCurrentWeather(input) {
       const geoLocation = await getGeoCode(input)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      const { main: { temp, temp_max, temp_min, humidity, feels_like }, sys: { country }, weather: [{ main, description }] } = weatherData
+      const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, weather: [{ main, description }], wind: { deg, speed }
+      } = weatherData
       return {
-        city: geoLocation.name,
+        city: name,
         country: country,
         temperature: temp,
         minTemp: temp_min,
         maxTemp: temp_max,
         humidity: humidity,
         feelsLike: feels_like,
+        pressure: pressure,
+        windDeg: deg,
+        windSpd: speed,
         mainWeather: main,
         desc: description
       }
     } else {
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${input.lat}&lon=${input.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      console.log(weatherData)
       const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, weather: [{ main, description }], wind: { deg, speed }
       } = weatherData
       return {
