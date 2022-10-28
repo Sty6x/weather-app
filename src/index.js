@@ -5,6 +5,7 @@ import * as Display from './display-weather.js'
 const userInput = document.querySelector('input')
 const main = document.querySelector('main')
 const temperatureHead = document.getElementById('temperature')
+
 function changeTempClass(target) {
   if (target.classList.contains('isC')) {
     target.removeAttribute('class', 'isC')
@@ -15,15 +16,6 @@ function changeTempClass(target) {
   }
 }
 
-async function forecastHours(hours, input) {
-  const forecastData = await Weather.getHoursForecast(input)
-  const { temp, time } = forecastData;
-  for (let i = 0; i < hours; i++) {
-    console.log(time[i])
-    console.log(temp[i])
-  }
-
-}
 
 main.addEventListener('click', e => {
   const target = e.target;
@@ -38,7 +30,8 @@ userInput.addEventListener('keypress', e => {
     // need to reset or else converts it from celcius to celcius
     temperatureHead.setAttribute('class', 'isC')
     Display.displayWeather(Weather.getWeather, userInput)
-    forecastHours(7, userInput)
+    Weather.getHoursForecast(userInput)
+    Weather.forecastHours(7, userInput)
   }
 })
 

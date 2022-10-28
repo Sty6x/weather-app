@@ -2,6 +2,7 @@ async function getGeoCode(input) {
   const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=1&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
   const { name, lat, lon } = geoCodeData[0];
+  console.log(lat, lon)
   return { name: name, lat: lat, lon: lon }
 }
 
@@ -54,11 +55,14 @@ function defaultErrorLoc(err, Display) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
   Display.displayWeather(getWeather, { lat: 40.730610, lon: -73.935242 })
 }
+
+
 export function userCurrentWeather(Display) {
-  return navigator.geolocation.getCurrentPosition(async function(pos) {
-    const position = pos.coords // geocode name passed into getWeather
+  return navigator.geolocation.getCurrentPosition(function(pos) {
+    const position = pos.coords
     const { latitude, longitude } = position
     Display.displayWeather(getWeather, { lat: latitude, lon: longitude })
+    forecastHours(12, { lat: latitude, lon: longitude })
   }, err => {
     defaultErrorLoc(err, Display)
   })
@@ -66,11 +70,34 @@ export function userCurrentWeather(Display) {
 
 
 export async function getHoursForecast(input) {
-  const geoCode = await getGeoCode(input)
-  const forecastResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${geoCode.lat}&longitude=${geoCode.lon}&hourly=temperature_2m`)
-  const forecastData = await forecastResponse.json()
-  const { hourly: { time, temperature_2m } } = forecastData;
-  return { time: time, temp: temperature_2m }
+  const isDOM = el => el instanceof Element
+  try {
+    if (isDOM(input)) {
+      const geoCode = await getGeoCode(input)
+      const forecastResponse = await fetch(`https://api.weatherbit.io/v2.0/forecast/hourly?lat=${geoCode.lat}&lon=${geoCode.lon}&key=bf5cd06a8b584d3e9cfb34307c2ca472&hours=24`)
+      const forecastData = await forecastResponse.json()
+      const { data } = forecastData;
+      // console.log(data)
+      return data
+    } else {
+      const forecastResponse = await fetch(`https://api.weatherbit.io/v2.0/forecast/hourly?lat=${input.lat}&lon=${input.lon}&key=bf5cd06a8b584d3e9cfb34307c2ca472&hours=24`)
+      const forecastData = await forecastResponse.json()
+      const { data } = forecastData;
+      return data
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
+export async function forecastHours(hours, input) {
+  const forecastData = await getHoursForecast(input)
+  const relevantDataHrs = []
+  for (let i = 0; i < hours; i++) {
+    const { app_temp, timestamp_local, weather: { description } } = forecastData[i]
+    relevantDataHrs[i] = { temp: app_temp, time: timestamp_local, weather: description }
+  }
+  console.log(relevantDataHrs)
+  return relevantDataHrs
+}
 
