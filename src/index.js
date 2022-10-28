@@ -31,7 +31,7 @@ userInput.addEventListener('keypress', e => {
     temperatureHead.setAttribute('class', 'isC')
     Display.displayWeather(Weather.getWeather, userInput)
     Weather.getHoursForecast(userInput)
-    Weather.forecastHours(7, userInput)
+    Weather.getExtForecastHours(7, userInput)
   }
 })
 

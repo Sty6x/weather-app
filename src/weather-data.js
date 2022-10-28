@@ -62,7 +62,8 @@ export function userCurrentWeather(Display) {
     const position = pos.coords
     const { latitude, longitude } = position
     Display.displayWeather(getWeather, { lat: latitude, lon: longitude })
-    forecastHours(12, { lat: latitude, lon: longitude })
+    getExtForecastHours(12, { lat: latitude, lon: longitude })
+    getExtDailyForecast(12, { lat: latitude, lon: longitude })
   }, err => {
     defaultErrorLoc(err, Display)
   })
@@ -90,7 +91,7 @@ export async function getHoursForecast(input) {
   }
 }
 
-export async function forecastHours(hours, input) {
+export async function getExtForecastHours(hours, input) {
   const forecastData = await getHoursForecast(input)
   const relevantDataHrs = []
   for (let i = 0; i < hours; i++) {
@@ -101,3 +102,35 @@ export async function forecastHours(hours, input) {
   return relevantDataHrs
 }
 
+export async function getDailyForecast(input) {
+  const isDOM = el => el instanceof Element
+  try {
+    if (isDOM(input)) {
+      const geoCode = await getGeoCode(input)
+      const forecastDailyResponse = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${geoCode.lat}&lon=${geoCode.lon}&key=bf5cd06a8b584d3e9cfb34307c2ca472`)
+      const forecastDailyData = await forecastDailyResponse.json()
+      const { data } = forecastDailyData;
+      console.log(data)
+      return data
+    } else {
+      const forecastDailyResponse = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${input.lat}&lon=${input.lon}&key=bf5cd06a8b584d3e9cfb34307c2ca472`)
+      const forecastDailyData = await forecastDailyResponse.json()
+      const { data } = forecastDailyData;
+      return data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+export async function getExtDailyForecast(days, input) {
+  const forecastData = await getDailyForecast(input)
+  const relevantDailyData = []
+  for (let i = 0; i < days; i++) {
+    const { app_max_temp, datetime, weather: { description } } = forecastData[i]
+    relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description }
+  }
+  console.log(relevantDailyData)
+  return relevantDailyData
+}
