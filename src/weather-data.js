@@ -12,7 +12,6 @@ async function getGeoCode(input) {
 // in lat and lon in the api url
 export async function getCurrentWeather(input) {
   const isDOM = el => el instanceof Element
-  console.log(input)
   try {
     if (isDOM(input)) {
       const geoLocation = await getGeoCode(input)
@@ -154,4 +153,6 @@ export async function getExtDailyForecast(mess, input) {
   }
 }
 PubSub.subscribe('userInput', getExtDailyForecast)
-PubSub.subscribe('userInput', getCurrentWeather)
+PubSub.subscribe('userInput', (mes, data) => {
+  getCurrentWeather(data)
+})

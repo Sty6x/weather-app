@@ -38,3 +38,7 @@ userInput.addEventListener('keypress', e => {
 window.onload = function() {
   Weather.userCurrentWeather(Display)
 }
+
+PubSub.subscribe('userInput', (mes, data) => {
+  Display.displayWeather(Weather.getCurrentWeather, data)
+})

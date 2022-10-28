@@ -49,10 +49,4 @@ export function convertTemp(target) {
   });
 }
 
-// PubSub.subscribe('getDailyForecast', async (e, z) => {
-//   console.log(e)
-//   const som = await z(9, userInput)
-//   console.log(som)
-// })
-
 
