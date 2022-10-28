@@ -13,13 +13,12 @@ const temps = [temp, maxTemp, minTemp]
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
-    console.log(weatherData)
     city.textContent = `${weatherData.city}, ${weatherData.country}`;
     desc.textContent = weatherData.desc;
     temp.textContent = `${Math.round(weatherData.temperature)}°`;
     maxTemp.textContent = `${Math.round(weatherData.maxTemp)}°`;
     minTemp.textContent = `${Math.round(weatherData.minTemp)}°`;
-    press.textContent = `Pressure: ${weatherData.pressure}`
+    press.textContent = `Pressure: ${weatherData.pressure} hPa`
     humid.textContent = `Humidity: ${weatherData.humidity}%`
     feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
     spd.textContent = weatherData.windSpd

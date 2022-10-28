@@ -30,8 +30,8 @@ userInput.addEventListener('keypress', e => {
     // need to reset or else converts it from celcius to celcius
     temperatureHead.setAttribute('class', 'isC')
     Display.displayWeather(Weather.getCurrentWeather, userInput)
-    Weather.getHourlyForecast(userInput)
-    Weather.getDailyForecast(userInput)
+    // Weather.getHourlyForecast(userInput)
+    // Weather.getDailyForecast(userInput)
   }
 })
 

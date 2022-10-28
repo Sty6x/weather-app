@@ -59,15 +59,11 @@ url('./resources/woff-fonts/Poppins-Bold.woff') format('woff'),
 url('./resources/woff-fonts/Poppins-Medium.woff') format('woff');
 }
 :root{
-  --jet: #3A3844ff;
---eggplant: #513E49ff;
---rhythm: #696F8Fff;
---blue-yonder: #647598ff;
---thistle: #BFB0C4ff;
---eggplant-2: #54404Cff;
---eggplant-3: #6C4A56ff;
---eggplant-4: #5A414Cff;
---mauve-taupe: #7E5867ff;
+  --grey: #8B8C88;
+  --light-grey: #D8D9D7;
+  --dirty-green: #555936;
+  --mid-black: #262625;
+  --dirty-yello: #A68524
 }
 body{
   overflow: hidden;
@@ -80,9 +76,10 @@ main{
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   flex-direction: column;
   background-color: var(--blue-yonder);
+  background-image: url('./resources/img/bg/forest-mountain-cloudy-valley.png');
 }
 
 header{
@@ -90,9 +87,11 @@ header{
   justify-content: space-between;
   align-items: center;
   padding:10px 20px;
-  background-color: whitesmoke;
   position: absolute;
   width: 98%;
+  background-color: rgb(245, 245, 245, 0.5);
+  border-bottom: 2px solid var(--grey);
+  backdrop-filter: blur(10px);
 }
 
 #logo{
@@ -116,18 +115,19 @@ header{
   display: flex;
   flex-direction: column;
   padding: 2.5em 3.5em;
-  background-color: var(--blue-yonder);
   margin: 0em 6em 0em 6em;
   margin-top: auto;
-  margin-bottom: 2em;
+  margin-bottom: 5em;
   gap: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #current-cont{
   display: flex;
   width: 80em;
   height: 100%;
-  outline: 1px solid red;
   justify-content: space-between;
   padding: 2em 3em 2em 3em;
   gap: 40px;
@@ -162,7 +162,7 @@ p#description{
 
 #detail-curr-cont{
   width: 40%;
-  height:  519px;
+  height:  450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -193,6 +193,8 @@ p#description{
   flex: 1;
   height:  100%;
   background-color: #3A3844;
+  border: 2px var(--mid-black) solid;
+  border-radius: 10px;
 }
 
 #daily{
@@ -212,4 +214,6 @@ p#description{
   flex: 1;
   height: 10em;
   background-color: #3A3844;
+  border: 2px var(--mid-black) solid;
+  border-radius: 10px;
 }
