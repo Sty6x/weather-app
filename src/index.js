@@ -30,7 +30,6 @@ userInput.addEventListener('keypress', e => {
   if (e.key == 'Enter') {
     // need to reset or else converts it from celcius to celcius
     temperatureHead.setAttribute('class', 'isC')
-    // Display.displayWeather(Weather.getCurrentWeather, userInput)
     PubSub.publish('userInput', userInput)
   }
 })
@@ -39,6 +38,12 @@ window.onload = function() {
   Weather.userCurrentWeather(Display)
 }
 
-PubSub.subscribe('userInput', (mes, data) => {
+
+PubSub.subscribe('userInput', async (mes, data) => {
+  console.log(mes)
   Display.displayWeather(Weather.getCurrentWeather, data)
+  Promise.all([Display.logObj(Weather.getExtHourlyForecast, data),
+  Display.logObj(Weather.getExtDailyForecast, data)]).then(response => {
+    console.log(response)
+  })
 })

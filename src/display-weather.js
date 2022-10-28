@@ -1,4 +1,3 @@
-import PubSub from "pubsub-js"
 
 const city = document.getElementById('city')
 const temp = document.getElementById('temperature')
@@ -24,9 +23,7 @@ export async function displayWeather(dataObj, input) {
     humid.textContent = `Humidity: ${weatherData.humidity}%`
     feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
     spd.textContent = weatherData.windSpd
-    // spdName.textContent = `Speed:`
     deg.textContent = `${weatherData.windDeg}°`;
-    // degName.textContent = `Degrees:`
 
   } catch (error) {
     console.log(error)
@@ -49,4 +46,6 @@ export function convertTemp(target) {
   });
 }
 
-
+export async function logObj(obj, input) {
+  return await obj(input)
+}

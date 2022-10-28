@@ -1,4 +1,3 @@
-import PubSub from 'pubsub-js'
 async function getGeoCode(input) {
   const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=5&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
@@ -79,7 +78,7 @@ export function userCurrentWeather(Display) {
 }
 
 
-export async function getHourlyForecast(input) {
+async function hourlyForecastAPI(input) {
   const isDOM = el => el instanceof Element
   try {
     if (isDOM(input)) {
@@ -100,7 +99,7 @@ export async function getHourlyForecast(input) {
 }
 
 
-export async function getDailyForecast(input) {
+async function dailyForecastAPI(input) {
   const isDOM = el => el instanceof Element
   try {
     if (isDOM(input)) {
@@ -121,10 +120,11 @@ export async function getDailyForecast(input) {
 }
 
 
-export async function getExtHourlyForecast(hours, input) {
+export async function getExtHourlyForecast(input) {
   try {
-    const forecastData = await getHourlyForecast(input)
+    const forecastData = await hourlyForecastAPI(input)
     const relevantDataHrs = []
+    const hours = 12
     for (let i = 0; i < hours; i++) {
       const { app_temp, timestamp_local, weather: { description } } = forecastData[i]
       relevantDataHrs[i] = { temp: app_temp, time: timestamp_local, weather: description }
@@ -136,23 +136,19 @@ export async function getExtHourlyForecast(hours, input) {
   }
 }
 
-
-export async function getExtDailyForecast(mess, input) {
+export async function getExtDailyForecast(input) {
   try {
-    const forecastData = await getDailyForecast(input)
+    const forecastData = await dailyForecastAPI(input)
     const relevantDailyData = []
     const days = 12
     for (let i = 0; i < days; i++) {
       const { app_max_temp, datetime, weather: { description } } = forecastData[i]
       relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description }
     }
-    console.log(relevantDailyData)
     return relevantDailyData
   } catch (err) {
     console.log(err)
   }
 }
-PubSub.subscribe('userInput', getExtDailyForecast)
-PubSub.subscribe('userInput', (mes, data) => {
-  getCurrentWeather(data)
-})
+
+
