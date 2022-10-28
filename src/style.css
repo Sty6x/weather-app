@@ -112,20 +112,6 @@ header{
 }
 
 
-#city{
-  font-size: 1.2rem;
-}
-#temperature{
-  font-size: 5rem;
-  cursor:pointer;
-}
-
-
-#min-max-temp{
-  display: flex;
-  gap:10px;
-}
-
 #weather-cont{
   display: flex;
   flex-direction: column;
@@ -142,11 +128,10 @@ header{
   width: 80em;
   height: 100%;
   outline: 1px solid red;
-  justify-content: center;
+  justify-content: space-between;
   padding: 2em 3em 2em 3em;
-  background-color:blue;
-  gap: 20px;
-}
+  gap: 40px;
+ }
 
 #imp-details{
   display: flex;
@@ -155,13 +140,32 @@ header{
   gap: 5px;
 }
 
+
+#city{
+  font-size: 2rem;
+}
+#temperature{
+  font-size: 5rem;
+  cursor:pointer;
+}
+
+
+#min-max-temp{
+  display: flex;
+  /* gap:10px; */
+}
+
+
+p#description{
+  font-size: 1.2rem;
+}
+
 #detail-curr-cont{
-  width: 50%;
+  width: 40%;
   height:  519px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* outline: red solid 1px; */
   color: white;
 }
 
@@ -175,15 +179,18 @@ header{
 #lower-extra-inf{
   display: flex;
   justify-content: space-between;
+  font-size: 1.1rem;
+  line-height: 30px;
 }
 #lower-extra-inf p > span{
   display: flex;
   justify-content: center;
+  align-items: baseline;
 }
 
 
 #current-hourly-chart{
-  width: 50%;
+  flex: 1;
   height:  100%;
   background-color: #3A3844;
 }

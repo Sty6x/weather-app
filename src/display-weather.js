@@ -8,6 +8,7 @@ const temps = [temp, maxTemp, minTemp]
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
+    console.log(weatherData)
     city.textContent = weatherData.city;
     desc.textContent = weatherData.desc;
     temp.textContent = `${Math.round(weatherData.temperature)}°`;
