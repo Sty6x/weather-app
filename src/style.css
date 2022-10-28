@@ -72,6 +72,8 @@ url('./resources/woff-fonts/Poppins-Medium.woff') format('woff');
 body{
   overflow: hidden;
   font-family: 'Poppins';
+  height: 100vh;
+  width: 100vw;
 }
 main{
   display: flex;  
@@ -81,14 +83,6 @@ main{
   width: 100%;
   flex-direction: column;
   background-color: var(--blue-yonder);
-  /* padding-left: 50px ; */
-  /* padding-right: 50px ; */
-}
-form{
-  display: flex;  
-  flex-direction: column;
-  box-sizing: border-box;
-  gap: 15px;
 }
 
 header{
@@ -114,13 +108,6 @@ header{
   width: 30px;
 }
 
-#imp-details{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  gap: 10px;
-}
 
 #city{
   font-size: 1.2rem;
@@ -137,8 +124,56 @@ header{
 }
 
 #weather-cont{
+  display: flex;
+  flex-direction: column;
   padding: 2.5em 3.5em;
   background-color: var(--blue-yonder);
-  min-width: 50%;
-  height: 70%;
+  margin: 0em 6em 0em 6em;
+  outline:  lime solid 1px;
+  gap: 20px;
+}
+
+#current-cont{
+  display: flex;
+  width: 80em;
+  height: 100%;
+  outline: 1px solid red;
+  justify-content: center;
+  padding: 2em 3em 2em 3em;
+  background-color:blue;
+
+}
+
+#imp-details{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 5px;
+  width: 50%;
+  height:  519px;
+}
+
+#current-hourly-chart{
+  width: 50%;
+  height:  100%;
+  background-color: #3A3844;
+}
+
+#daily{
+  min-width: 100%;
+}
+#daily-list-cont{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+#daily-list-cont > li {
+  display:flex;
+  justify-items: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  width: 50%;
+  /* flex: 1; */
+  height: 10em;
 }
