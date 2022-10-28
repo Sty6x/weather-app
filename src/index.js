@@ -1,6 +1,7 @@
 import './style.css'
 import * as Weather from './weather-data.js'
 import * as Display from './display-weather.js'
+import PubSub from 'pubsub-js'
 
 const userInput = document.querySelector('input')
 const main = document.querySelector('main')
@@ -29,12 +30,10 @@ userInput.addEventListener('keypress', e => {
   if (e.key == 'Enter') {
     // need to reset or else converts it from celcius to celcius
     temperatureHead.setAttribute('class', 'isC')
-    Display.displayWeather(Weather.getCurrentWeather, userInput)
-    // Weather.getHourlyForecast(userInput)
-    // Weather.getDailyForecast(userInput)
+    // Display.displayWeather(Weather.getCurrentWeather, userInput)
+    PubSub.publish('userInput', userInput)
   }
 })
-
 
 window.onload = function() {
   Weather.userCurrentWeather(Display)

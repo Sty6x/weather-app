@@ -1,3 +1,5 @@
+import PubSub from "pubsub-js"
+
 const city = document.getElementById('city')
 const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
@@ -46,3 +48,11 @@ export function convertTemp(target) {
     }
   });
 }
+
+// PubSub.subscribe('getDailyForecast', async (e, z) => {
+//   console.log(e)
+//   const som = await z(9, userInput)
+//   console.log(som)
+// })
+
+

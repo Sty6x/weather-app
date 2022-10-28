@@ -1,8 +1,8 @@
+import PubSub from 'pubsub-js'
 async function getGeoCode(input) {
   const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=5&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
   const { name, lat, lon } = geoCodeData[0];
-  console.log(geoCodeData)
   return { name: name, lat: lat, lon: lon }
 }
 
@@ -12,6 +12,7 @@ async function getGeoCode(input) {
 // in lat and lon in the api url
 export async function getCurrentWeather(input) {
   const isDOM = el => el instanceof Element
+  console.log(input)
   try {
     if (isDOM(input)) {
       const geoLocation = await getGeoCode(input)
@@ -19,7 +20,6 @@ export async function getCurrentWeather(input) {
       const preLon = geoLocation.lon.toPrecision(geoLocation.lon.length)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${preLat}&lon=${preLon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      console.log(weatherData)
       const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, weather: [{ main, description }], wind: { deg, speed }
       } = weatherData
       return {
@@ -64,7 +64,7 @@ export async function getCurrentWeather(input) {
 
 function defaultErrorLoc(err, Display) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
-  Display.displayWeather(getCurrentWeather, { lat: 40.730610, lon: -73.935242 })
+  Display.displayWeather('', { lat: 40.730610, lon: -73.935242 }, getCurrentWeather)
 }
 
 export function userCurrentWeather(Display) {
@@ -72,8 +72,8 @@ export function userCurrentWeather(Display) {
     const position = pos.coords
     const { latitude, longitude } = position
     Display.displayWeather(getCurrentWeather, { lat: latitude, lon: longitude })
-    getExtHourlyForecast(12, { lat: latitude, lon: longitude })
-    getExtDailyForecast(12, { lat: latitude, lon: longitude })
+    // getExtHourlyForecast(12, { lat: latitude, lon: longitude })
+    // getExtDailyForecast(12, { lat: latitude, lon: longitude })
   }, err => {
     defaultErrorLoc(err, Display)
   })
@@ -89,7 +89,7 @@ export async function getHourlyForecast(input) {
       const forecastData = await forecastResponse.json()
       const { data } = forecastData;
       return data
-    } else {
+    } {
       const forecastResponse = await fetch(`https://api.weatherbit.io/v2.0/forecast/hourly?lat=${input.lat}&lon=${input.lon}&key=bf5cd06a8b584d3e9cfb34307c2ca472&hours=24`)
       const forecastData = await forecastResponse.json()
       const { data } = forecastData;
@@ -138,16 +138,20 @@ export async function getExtHourlyForecast(hours, input) {
 }
 
 
-export async function getExtDailyForecast(days, input) {
+export async function getExtDailyForecast(mess, input) {
   try {
     const forecastData = await getDailyForecast(input)
     const relevantDailyData = []
+    const days = 12
     for (let i = 0; i < days; i++) {
       const { app_max_temp, datetime, weather: { description } } = forecastData[i]
       relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description }
     }
+    console.log(relevantDailyData)
     return relevantDailyData
   } catch (err) {
     console.log(err)
   }
 }
+PubSub.subscribe('userInput', getExtDailyForecast)
+PubSub.subscribe('userInput', getCurrentWeather)

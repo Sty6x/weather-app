@@ -215,9 +215,6 @@ p#description{
   background-color: rgb(245, 245, 245, 0.7);
   border: 2px var(--mid-black) solid;
   border-radius: 10px;
-}
-
-#wed{
   flex-direction: column;
   gap: 10px;
 }
