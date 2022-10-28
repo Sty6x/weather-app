@@ -82,7 +82,7 @@ async function hourlyForecastAPI(input) {
 }
 
 
-async function dailyForecastAPI(input) {
+export async function dailyForecastAPI(input) {
   const isDOM = el => el instanceof Element
   try {
     if (isDOM(input)) {

@@ -12,6 +12,27 @@ const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
 const temps = [temp, maxTemp, minTemp]
 
+const days = 7
+function createDailyCards(num) {
+  const d = []
+  for (let i = 0; i < num; i++) {
+    let dayCont = document.createElement('li')
+    d.push(dayCont)
+    dailyCont.append(d[i])
+    d[i].setAttribute('class', 'daily-cards')
+  }
+}
+
+createDailyCards(days)
+const dcNodeList = document.querySelectorAll('.daily-cards')
+const dailyCards = Array.from(dcNodeList)
+dailyCards.forEach(day => {
+  const time = document.createElement('h3')
+  const dayTemp = document.createElement('p')
+  const icon = document.createElement('div')
+  day.append(time, dayTemp, icon)
+
+})
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
@@ -51,20 +72,15 @@ export async function logObj(obj, input) {
   return await obj(input)
 }
 
+
 export async function displayDailyForecast(dataObj, input) {
   const dailyData = await dataObj(input)
-  dailyData.forEach(day => {
-    const dayCont = document.createElement('li')
-    const date = document.createElement('h3')
-    const temp = document.createElement('p')
-    const icon = document.createElement('div')
-    date.textContent = `${day.time}`
-    temp.textContent = `${day.temp}°`
-    // if(day.weather == '  ')
-    icon.setAttribute('class', 'is-raining')
-    dayCont.append(date, temp, icon)
-    dailyCont.appendChild(dayCont)
+  for (let i = 0; i < dailyData.length; i++) {
+    dailyCards[i].firstElementChild.textContent = `${dailyData[i].time}`
+    dailyCards[i].children[1].textContent = `${dailyData[i].temp}`
+    dailyCards[i].children[2].setAttribute('class', 'is-raining')
+    dailyCards[i].children[2].textContent = `${dailyData[i].weather}`
 
-  });
+  }
 
 }
