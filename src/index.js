@@ -34,9 +34,27 @@ userInput.addEventListener('keypress', e => {
   }
 })
 
-window.onload = function() {
-  Weather.userCurrentWeather(Display)
+
+function defaultErrorLoc(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+  Display.displayWeather(Weather.getCurrentWeather, { lat: 40.730610, lon: -73.935242 })
 }
+
+function userCurrentWeather() {
+  return navigator.geolocation.getCurrentPosition(function(pos) {
+    const position = pos.coords
+    const { latitude, longitude } = position
+    console.log(latitude, longitude)
+    Display.displayWeather(Weather.getCurrentWeather, { lat: latitude, lon: longitude })
+  }, err => {
+    defaultErrorLoc(err)
+  })
+}
+
+
+// window.onload = function() {
+// }
+userCurrentWeather(Display)
 
 
 PubSub.subscribe('userInput', async (mes, data) => {

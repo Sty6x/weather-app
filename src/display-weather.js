@@ -22,7 +22,7 @@ export async function displayWeather(dataObj, input) {
     press.textContent = `Pressure: ${weatherData.pressure} hPa`
     humid.textContent = `Humidity: ${weatherData.humidity}%`
     feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
-    spd.textContent = weatherData.windSpd
+    spd.textContent = `${weatherData.windSpd}km/h`;
     deg.textContent = `${weatherData.windDeg}°`;
 
   } catch (error) {
