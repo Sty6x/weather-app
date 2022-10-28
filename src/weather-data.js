@@ -60,23 +60,6 @@ export async function getCurrentWeather(input) {
   }
 }
 
-function defaultErrorLoc(err, Display) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-  Display.displayWeather('', { lat: 40.730610, lon: -73.935242 }, getCurrentWeather)
-}
-
-export function userCurrentWeather(Display) {
-  return navigator.geolocation.getCurrentPosition(function(pos) {
-    const position = pos.coords
-    const { latitude, longitude } = position
-    Display.displayWeather(getCurrentWeather, { lat: latitude, lon: longitude })
-    // getExtHourlyForecast(12, { lat: latitude, lon: longitude })
-    // getExtDailyForecast(12, { lat: latitude, lon: longitude })
-  }, err => {
-    defaultErrorLoc(err, Display)
-  })
-}
-
 
 async function hourlyForecastAPI(input) {
   const isDOM = el => el instanceof Element
@@ -140,11 +123,12 @@ export async function getDailyForecast(input) {
   try {
     const forecastData = await dailyForecastAPI(input)
     const relevantDailyData = []
-    const days = 12
+    const days = 7
     for (let i = 0; i < days; i++) {
       const { app_max_temp, datetime, weather: { description } } = forecastData[i]
       relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description }
     }
+    console.log(relevantDailyData)
     return relevantDailyData
   } catch (err) {
     console.log(err)
