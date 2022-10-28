@@ -120,7 +120,7 @@ async function dailyForecastAPI(input) {
 }
 
 
-export async function getExtHourlyForecast(input) {
+export async function getHourlyForecast(input) {
   try {
     const forecastData = await hourlyForecastAPI(input)
     const relevantDataHrs = []
@@ -136,7 +136,7 @@ export async function getExtHourlyForecast(input) {
   }
 }
 
-export async function getExtDailyForecast(input) {
+export async function getDailyForecast(input) {
   try {
     const forecastData = await dailyForecastAPI(input)
     const relevantDailyData = []

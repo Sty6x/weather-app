@@ -42,8 +42,8 @@ window.onload = function() {
 PubSub.subscribe('userInput', async (mes, data) => {
   console.log(mes)
   Display.displayWeather(Weather.getCurrentWeather, data)
-  Promise.all([Display.logObj(Weather.getExtHourlyForecast, data),
-  Display.logObj(Weather.getExtDailyForecast, data)]).then(response => {
+  Promise.all([Display.logObj(Weather.getHourlyForecast, data),
+  Display.logObj(Weather.getDailyForecast, data)]).then(response => {
     console.log(response)
   })
 })
