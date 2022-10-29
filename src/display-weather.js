@@ -90,7 +90,6 @@ export async function displayDailyForecast(dataObj, input) {
     const date = format(new Date(dailyData[i].time), 'E')
     dailyCards[i].firstElementChild.textContent = `${date}`
     dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].temp)}°`
-    // dailyCards[i].children[2].textContent = `${dailyData[i].weather}`
   }
   dailyCardsWeatherCD()
 }

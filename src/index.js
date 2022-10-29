@@ -34,9 +34,10 @@ userInput.addEventListener('keypress', e => {
 })
 
 
-function defaultErrorLoc(err) {
+function defaultNoAccessUserLoc(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
   Display.displayWeather(Weather.getCurrentWeather, { lat: 40.730610, lon: -73.935242 })
+  Display.displayDailyForecast(Weather.getDailyForecast, { lat: 40.730610, lon: -73.935242 })
 }
 
 function userCurrentWeather() {
@@ -45,8 +46,9 @@ function userCurrentWeather() {
     const { latitude, longitude } = position
     console.log(latitude, longitude)
     Display.displayWeather(Weather.getCurrentWeather, { lat: latitude, lon: longitude })
+    Display.displayDailyForecast(Weather.getDailyForecast, { lat: latitude, lon: longitude })
   }, err => {
-    defaultErrorLoc(err)
+    defaultNoAccessUserLoc(err)
   })
 }
 
