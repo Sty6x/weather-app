@@ -123,12 +123,11 @@ export async function getDailyForecast(input) {
   try {
     const forecastData = await dailyForecastAPI(input)
     const relevantDailyData = []
-    const days = 7
+    const days = 8
     for (let i = 0; i < days; i++) {
-      const { app_max_temp, datetime, weather: { description } } = forecastData[i]
-      relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description }
+      const { app_max_temp, datetime, weather: { description, code } } = forecastData[i]
+      relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description, weatherCode: code }
     }
-    console.log(relevantDailyData)
     return relevantDailyData
   } catch (err) {
     console.log(err)

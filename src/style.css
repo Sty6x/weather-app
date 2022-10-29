@@ -220,18 +220,46 @@ p#description{
 }
 
 li > h4{
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 
 li > p{
-  font-size: 1.3em;
+  font-size: 1.7em;
 }
-/* li >div{ */
-/* } */
-.is-raining{
-  background-image: url('./resources/img/rain/cloud.png');
+li > div{
   width: 50px;
   height: 50px;
   background-size: 50px 50px;
 
+}
+
+.is-clear-sky{
+  background-image: url('./resources/img/sunny/sun.png');
+} 
+.is-thunder-storm{
+ background-image: url('./resources/img/thunderstorm/thunderstorm\(3\).png');
+}
+.is-overcast-clouds{
+background-image: url('./resources/img/overcast/overcast3.png');
+}
+.is-few-clouds{
+background-image: url('./resources/img/cloudy/sun\(2\).png');
+}
+.is-raining{
+  background-image: url('./resources/img/rain/raining.png');
+}
+.is-snowing{
+  background-image: url('./resources/img/snow/snow.png');
+}
+.is-snow-shower{
+  background-image: url('./resources/img/snow/snow-shower.png');
+} 
+.is-sleet{
+background-image: url('./resources/img/snow/sleet.png');
+}
+.is-fog{
+ background-image: url('./resources/img/fog/fog.png');
+}
+.is-light-drizzle{
+ background-image: url('./resources/img/drizzle/drizzle.png');
 }
