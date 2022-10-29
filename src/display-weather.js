@@ -9,6 +9,7 @@ const press = document.getElementById('inf-0')
 const humid = document.getElementById('inf-1')
 const feelsLike = document.getElementById('inf-2')
 const deg = document.getElementById('low-inf-0-val')
+const vis = document.getElementById('low-inf-2-val')
 const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
 const temps = [temp, maxTemp, minTemp]
@@ -55,7 +56,8 @@ export async function displayWeather(dataObj, input) {
     press.textContent = `Pressure: ${weatherData.pressure} hPa`
     humid.textContent = `Humidity: ${weatherData.humidity}%`
     feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
-    spd.textContent = `${weatherData.windSpd}km/h`;
+    spd.textContent = `${weatherData.windSpd}m/s`;
+    vis.textContent = `${weatherData.visibility / 1000}km`
     deg.textContent = `${weatherData.windDeg}°`;
   } catch (error) {
     console.log(error)
