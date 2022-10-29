@@ -227,8 +227,8 @@ p#description{
 #current-hourly-chart{
   flex: 1;
   height:  100%;
-  background-color: #3A3844;
-  border: 2px var(--mid-black) solid;
+  /* background-color: #3A3844; */
+  /* border: 2px var(--mid-black) solid; */
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -250,7 +250,6 @@ p#description{
   color: var(--mid-black);
   flex: 1;
   height: 10em;
-  /* background-color: #3A3844; */
   background-color: rgb(245, 245, 245, 0.7);
   border: 2px var(--mid-black) solid;
   border-radius: 10px;
