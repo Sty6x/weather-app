@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import ca from 'date-fns/locale/ca'
+import Chart from 'chart.js/auto';
 const city = document.getElementById('city')
 const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
@@ -12,6 +12,12 @@ const deg = document.getElementById('low-inf-0-val')
 const vis = document.getElementById('low-inf-2-val')
 const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
+const hourlyChart = document.getElementById('current-hourly-chart')
+const impCont = document.getElementById('current-cont')
+const canvas = document.createElement('canvas')
+canvas.setAttribute('id', 'myChart')
+impCont.children[0].after(canvas)
+const ctx = canvas.getContext('2d')
 const temps = [temp, maxTemp, minTemp]
 const thunderStormCD = [200, 201, 202, 230, 231, 232, 233]
 const lightDrizzleCD = [300, 301, 302]
@@ -152,4 +158,44 @@ async function dailyCardsWeatherCD() {
   })
 }
 
+const myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['a', 'b', 'c', 'd'],
+    datasets: [{
+      label: 'Hourly Temperature',
+      data: [10, 23, 4, 5],
+      borderRadius: 10,
+      borderWidth: 9,
+      // barThickness: 10,
+      backgroundColor: [
+        'rgba(255, 99, 132, )',
+        'rgba(54, 162, 235, )',
+        'rgba(255, 206, 86, )',
+        'rgba(75, 192, 192, )',
+        'rgba(153, 102, 255,)',
+        'rgba(255, 159, 64, )'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+    }]
+  },
+  options: {
+
+    layout: {
+      // padding: 200
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
 
