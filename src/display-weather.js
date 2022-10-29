@@ -1,4 +1,4 @@
-import { format, hoursToMinutes } from 'date-fns'
+import { format, formatISO9075, formatDistance, formatDuration } from 'date-fns'
 import Chart from 'chart.js/auto';
 import PubSub from 'pubsub-js'
 const city = document.getElementById('city')
@@ -156,27 +156,35 @@ async function dailyCardsWeatherCD() {
   })
 }
 PubSub.subscribe('getData', (mes, obj) => {
+  console.log('hourly forecast sent', mes)
   displayHourlyForecast(obj)
 })
+
+
 async function extTempTime(obj, n) {
   const data = await obj
   const arb = []
   if (n == 'temp') {
     for (let i = 0; i < 6; i++) {
-      arb.push(obj[i].temp);
+      arb.push(data[i].temp);
     }
+    console.log(arb)
     return arb
   } else if (n == 'time') {
     for (let i = 0; i < 6; i++) {
-      arb.push(obj[i].time);
+      let formattedTime = formatISO9075(new Date(data[i].time), { representation: 'time' })
+      console.log(formattedTime)
+      arb.push(formattedTime);
     }
     return arb
   }
 }
+
 export async function displayHourlyForecast(obj) {
   const hourlyObj = await obj
   const hourlyTemp = await extTempTime(hourlyObj, 'temp')
   const hourlyTime = await extTempTime(hourlyObj, 'time')
+
   const canvas = document.getElementById('myChart')
   const ctx = canvas.getContext('2d')
   if (canvas) {
@@ -187,6 +195,7 @@ export async function displayHourlyForecast(obj) {
   xcanvas.setAttribute('id', 'myChart')
   currHourlyChart.appendChild(xcanvas)
   const ctx2 = xcanvas.getContext('2d')
+
   const myChart = new Chart(ctx2, {
     type: 'bar',
     data: {
@@ -195,7 +204,7 @@ export async function displayHourlyForecast(obj) {
         label: 'Hourly Temperature',
         data: hourlyTemp,
         borderRadius: 10,
-        borderWidth: 9,
+        borderWidth: 1,
         // barThickness: 10,
         backgroundColor: [
           'rgba(255, 99, 132, )',
@@ -216,19 +225,38 @@ export async function displayHourlyForecast(obj) {
       }]
     },
     options: {
-
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white',
+            font: {
+            }
+          }
+        }
+      },
       layout: {
         padding: {
-          right: 50
+          right: 70,
+          left: 50
         }
       },
       scales: {
         y: {
+          ticks: {
+            color: 'white',
+          },
           beginAtZero: true
+        },
+        x: {
+
+          ticks: {
+            color: 'white',
+          },
         }
       }
     }
   });
-
+  Chart.defaults.font.size = 16;
+  // Chart.defaults.global.defaultFontColor = "#0000";
 }
 

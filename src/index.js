@@ -59,7 +59,7 @@ function userCurrentWeather() {
     const { latitude, longitude } = position
     Display.displayWeather(Weather.getCurrentWeather, { lat: latitude, lon: longitude })
     Display.displayDailyForecast(Weather.getDailyForecast, { lat: latitude, lon: longitude })
-    Display.displayHourlyForecast()
+    // Display.displayHourlyForecast({ lat: latitude, lon: longitude })
   }, err => {
     defaultNoAccessUserLoc(err)
   })
