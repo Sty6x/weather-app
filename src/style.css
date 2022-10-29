@@ -151,10 +151,43 @@ header{
 
 #min-max-temp{
   display: flex;
-  /* gap:10px; */
+  gap:30px;
+  font-size:1.2rem;
+  margin-left: 1em;
 }
 
+#max-temp{
+  position: relative;
+}
+#max-temp::before{
+  position:absolute;
+  content: '';
+  background-image: url('./resources/img/arrow/arrow-up.png');
+  background-size: 20px 20px;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  bottom:-5px;
+  left: -25px
+}
 
+#min-temp{
+  position: relative;
+}
+#min-temp::before{
+  position:absolute;
+  content: '';
+  background-image: url('./resources/img/arrow/arrow-up.png');
+  background-size: 20px 20px;
+  transform: rotate(180deg);
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  bottom:-5px;
+  left: -25px
+}
 p#description{
   font-size: 1.2rem;
 }
@@ -175,6 +208,9 @@ p#description{
   font-size: 1.2rem;
   gap: 25px;
 }
+
+
+
 #lower-extra-inf{
   display: flex;
   justify-content: space-between;

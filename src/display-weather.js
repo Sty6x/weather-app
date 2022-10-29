@@ -92,10 +92,10 @@ export async function displayDailyForecast(dataObj, input) {
     dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].temp)}°`
     // dailyCards[i].children[2].textContent = `${dailyData[i].weather}`
   }
-  checkWeatherCD(dailyData)
+  dailyCardsWeatherCD()
 }
 
-async function checkWeatherCD() {
+async function dailyCardsWeatherCD() {
   dailyCards.forEach(day => {
     console.log(day.children[2].id)
     const iconImg = day.children[2];
