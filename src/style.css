@@ -89,18 +89,20 @@ header{
   padding:10px 40px;
   position: absolute;
   width: 96%;
-  background-color: rgb(245, 245, 245, 0.8);
+  background-color: rgb(0, 0, 0, 0.3);
 }
 
 #logo{
   font-weight: bold;
   font-size: 1.2rem;
+  color: white;
 }
 
 #github-cont{
   display: flex;
   align-items: center;
   gap: 10px;
+  color: white;
 }
 
 #git-img{
