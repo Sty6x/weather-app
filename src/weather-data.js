@@ -1,5 +1,5 @@
 async function getGeoCode(input) {
-  const geoCodeResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=5&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
+  const geoCodeResponse = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${input.value}&limit=5&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
   const geoCodeData = await geoCodeResponse.json()
   const { name, lat, lon } = geoCodeData[0];
   return { name: name, lat: lat, lon: lon }
