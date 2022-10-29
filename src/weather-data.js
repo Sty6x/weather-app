@@ -115,7 +115,7 @@ export async function getHourlyForecast(input) {
       const { app_temp, timestamp_local, weather: { description } } = forecastData[i]
       relevantDataHrs[i] = { temp: app_temp, time: timestamp_local, weather: description }
     }
-    console.log(relevantDataHrs)
+    // console.log(relevantDataHrs)
     return relevantDataHrs
 
   } catch (error) {

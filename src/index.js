@@ -70,7 +70,6 @@ window.onload = function() {
   userCurrentWeather(Display)
 }
 
-
 PubSub.subscribe('userInput', async (mes, data) => {
   Weather.getHourlyForecast(data)
   Promise.all([Display.displayWeather(Weather.getCurrentWeather, data),

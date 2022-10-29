@@ -13,7 +13,9 @@ const deg = document.getElementById('low-inf-0-val')
 const vis = document.getElementById('low-inf-2-val')
 const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
-const canvas = document.getElementById('myChart')
+const currHourlyChart = document.getElementById('current-hourly-chart')
+
+
 const temps = [temp, maxTemp, minTemp]
 const thunderStormCD = [200, 201, 202, 230, 231, 232, 233]
 const lightDrizzleCD = [300, 301, 302]
@@ -25,7 +27,6 @@ const fogsCD = [700, 711, 721, 731, 741, 751]
 const clearSkyCD = 800
 const fewClouds = [801, 802, 803]
 const OCCD = 804
-const ctx = canvas.getContext('2d')
 
 const days = 7
 function createDailyCards(num) {
@@ -157,25 +158,42 @@ async function dailyCardsWeatherCD() {
 PubSub.subscribe('getData', (mes, obj) => {
   displayHourlyForecast(obj)
 })
-function extTempTime(obj, n) {
+async function extTempTime(obj, n) {
+  const data = await obj
   const arb = []
   if (n == 'temp') {
-    for (let i = 0; i < obj.length; i++) {
+    for (let i = 0; i < 6; i++) {
       arb.push(obj[i].temp);
+    }
+    return arb
+  } else if (n == 'time') {
+    for (let i = 0; i < 6; i++) {
+      arb.push(obj[i].time);
     }
     return arb
   }
 }
 export async function displayHourlyForecast(obj) {
   const hourlyObj = await obj
-
-  const myChart = new Chart(ctx, {
+  const hourlyTemp = await extTempTime(hourlyObj, 'temp')
+  const hourlyTime = await extTempTime(hourlyObj, 'time')
+  const canvas = document.getElementById('myChart')
+  const ctx = canvas.getContext('2d')
+  if (canvas) {
+    canvas.remove()
+  }
+  const xcanvas = document.createElement('canvas')
+  console.log(xcanvas)
+  xcanvas.setAttribute('id', 'myChart')
+  currHourlyChart.appendChild(xcanvas)
+  const ctx2 = xcanvas.getContext('2d')
+  const myChart = new Chart(ctx2, {
     type: 'bar',
     data: {
-      labels: ['a', 'b', 'c', 'd'],
+      labels: hourlyTime,
       datasets: [{
         label: 'Hourly Temperature',
-        data: [10, 23, 4, 5],
+        data: hourlyTemp,
         borderRadius: 10,
         borderWidth: 9,
         // barThickness: 10,
@@ -200,7 +218,9 @@ export async function displayHourlyForecast(obj) {
     options: {
 
       layout: {
-        // padding: 200
+        padding: {
+          right: 50
+        }
       },
       scales: {
         y: {
