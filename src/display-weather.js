@@ -27,7 +27,7 @@ const clearSkyCD = 800
 const fewClouds = [801, 802, 803]
 const OCCD = 804
 
-const days = 7
+const days = 9
 function createDailyCards(num) {
   const d = []
   for (let i = 0; i < num; i++) {
@@ -48,6 +48,8 @@ dailyCards.forEach(day => {
   day.append(time, dayTemp, icon)
 
 })
+
+
 export async function displayWeather(dataObj, input) {
   try {
     const weatherData = await dataObj(input)
@@ -67,6 +69,7 @@ export async function displayWeather(dataObj, input) {
     console.log('City Doesnt Exist')
   }
 }
+
 // triggers if either to celcius or to farenheit is active
 // triggers on class change
 export function convertTemp(target) {

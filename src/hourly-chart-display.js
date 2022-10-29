@@ -21,7 +21,8 @@ async function extTempTime(obj, type) {
   } else if (type == 'time') {
     for (let i = 0; i < obj.length; i++) {
       let formattedTime = formatISO9075(new Date(obj[i].time), { representation: 'time' })
-      let newTime = formattedTime.slice(0, 2)
+      console.log(formattedTime)
+      let newTime = formattedTime.slice(0, 5)
       arb.push(newTime);
     }
     return arb
@@ -36,7 +37,7 @@ export async function displayHourlyForecast(obj, input) {
 
   Promise.all([hourlyObj, hourlyTime]).then(() => {
     const canvas = document.getElementById('myChart')
-    const ctx = canvas.getContext('2d')
+    // const ctx = canvas.getContext('2d')
     if (canvas) {
       canvas.remove()
     }
@@ -101,8 +102,8 @@ export async function displayHourlyForecast(obj, input) {
         },
         layout: {
           padding: {
-            right: 70,
-            left: 50
+            right: 50,
+            left: 30
           }
         },
         scales: {
