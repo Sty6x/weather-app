@@ -18,7 +18,8 @@ export async function getCurrentWeather(input) {
       const preLon = geoLocation.lon.toPrecision(geoLocation.lon.length)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${preLat}&lon=${preLon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, weather: [{ main, description }], wind: { deg, speed }
+      console.log(weatherData)
+      const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, visibility, weather: [{ main, description }], wind: { deg, speed }
       } = weatherData
       return {
         city: geoLocation.name,
@@ -32,12 +33,13 @@ export async function getCurrentWeather(input) {
         windDeg: deg,
         windSpd: speed,
         mainWeather: main,
-        desc: description
+        desc: description,
+        visibility: visibility
       }
     } else {
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${input.lat}&lon=${input.lon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, weather: [{ main, description }], wind: { deg, speed }
+      const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, visibility, weather: [{ main, description }], wind: { deg, speed }
       } = weatherData
       return {
         city: name,
@@ -51,7 +53,8 @@ export async function getCurrentWeather(input) {
         windDeg: deg,
         windSpd: speed,
         mainWeather: main,
-        desc: description
+        desc: description,
+        visibility: visibility
       }
     }
   } catch (e) {
@@ -125,8 +128,8 @@ export async function getDailyForecast(input) {
     const relevantDailyData = []
     const days = 8
     for (let i = 0; i < days; i++) {
-      const { app_max_temp, datetime, weather: { description, code } } = forecastData[i]
-      relevantDailyData[i] = { temp: app_max_temp, time: datetime, weather: description, weatherCode: code }
+      const { app_max_temp, app_min_temp, datetime, weather: { description, code } } = forecastData[i]
+      relevantDailyData[i] = { maxTemp: app_max_temp, minTemp: app_min_temp, time: datetime, weather: description, weatherCode: code }
     }
     return relevantDailyData
   } catch (err) {

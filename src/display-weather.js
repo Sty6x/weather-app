@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import ca from 'date-fns/locale/ca'
 const city = document.getElementById('city')
 const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
@@ -83,20 +84,25 @@ export async function logObj(obj, input) {
 
 
 export async function displayDailyForecast(dataObj, input) {
-  const dailyData = await dataObj(input)
-  dailyData.shift(0)
-  for (let i = 0; i < dailyData.length; i++) {
-    dailyCards[i].children[2].setAttribute('id', `${dailyData[i].weatherCode}`)
-    const date = format(new Date(dailyData[i].time), 'E')
-    dailyCards[i].firstElementChild.textContent = `${date}`
-    dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].temp)}°`
+  try {
+    const dailyData = await dataObj(input)
+    dailyData.shift(0)
+    for (let i = 0; i < dailyData.length; i++) {
+      dailyCards[i].children[2].setAttribute('id', `${dailyData[i].weatherCode}`)
+      const date = format(new Date(dailyData[i].time), 'E')
+      dailyCards[i].firstElementChild.textContent = `${date}`
+      dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].maxTemp)}°/${Math.round(dailyData[i].minTemp)}°`
+    }
+    dailyCardsWeatherCD()
+  } catch (err) {
+    console.log(err)
   }
-  dailyCardsWeatherCD()
 }
 
+
+// please dont look here 
 async function dailyCardsWeatherCD() {
   dailyCards.forEach(day => {
-    console.log(day.children[2].id)
     const iconImg = day.children[2];
     for (let i = 0; i < 35; i++) {
       if (iconImg.id == clearSkyCD) {
