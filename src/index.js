@@ -1,6 +1,7 @@
 import './style.css'
 import * as Weather from './weather-data.js'
 import * as Display from './display-weather.js'
+import * as HourlyChart from './hourly-chart-display.js'
 import PubSub from 'pubsub-js'
 
 const userInput = document.querySelector('input')
@@ -26,23 +27,21 @@ main.addEventListener('click', e => {
   }
 })
 
+
 function sendDataAccross(e) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (e.key == 'Enter') {
       resolve(userInput)
     }
   })
 }
+
 userInput.addEventListener('keypress', e => {
   sendDataAccross(e).then((response) => {
     temperatureHead.setAttribute('class', 'isC')
     PubSub.publish('userInput', userInput)
     return response
-  }).then((response) => {
-    console.log(response)
-    PubSub.publish('getData', Weather.getHourlyForecast(response))
-  })
-    .catch(er => console.log(er))
+  }).catch(er => console.log(er))
 })
 
 
@@ -50,7 +49,7 @@ function defaultNoAccessUserLoc(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
   Display.displayWeather(Weather.getCurrentWeather, { lat: 40.730610, lon: -73.935242 })
   Display.displayDailyForecast(Weather.getDailyForecast, { lat: 40.730610, lon: -73.935242 })
-
+  HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, { lat: 40.730610, lon: -73.935242 })
 }
 
 function userCurrentWeather() {
@@ -59,7 +58,7 @@ function userCurrentWeather() {
     const { latitude, longitude } = position
     Display.displayWeather(Weather.getCurrentWeather, { lat: latitude, lon: longitude })
     Display.displayDailyForecast(Weather.getDailyForecast, { lat: latitude, lon: longitude })
-    // Display.displayHourlyForecast({ lat: latitude, lon: longitude })
+    HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, { lat: latitude, lon: longitude })
   }, err => {
     defaultNoAccessUserLoc(err)
   })
@@ -70,10 +69,12 @@ window.onload = function() {
   userCurrentWeather(Display)
 }
 
-PubSub.subscribe('userInput', async (mes, data) => {
+PubSub.subscribe('userInput', async (mess, data) => {
   Weather.getHourlyForecast(data)
   Promise.all([Display.displayWeather(Weather.getCurrentWeather, data),
-  Display.displayDailyForecast(Weather.getDailyForecast, data)]).then(() => {
+  Display.displayDailyForecast(Weather.getDailyForecast, data)],
+    HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, data)
+  ).then(() => {
   }).catch(e => {
     console.log(e)
   })

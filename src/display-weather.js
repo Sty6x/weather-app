@@ -13,7 +13,6 @@ const deg = document.getElementById('low-inf-0-val')
 const vis = document.getElementById('low-inf-2-val')
 const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
-const currHourlyChart = document.getElementById('current-hourly-chart')
 
 
 const temps = [temp, maxTemp, minTemp]
@@ -155,108 +154,5 @@ async function dailyCardsWeatherCD() {
     }
   })
 }
-PubSub.subscribe('getData', (mes, obj) => {
-  console.log('hourly forecast sent', mes)
-  displayHourlyForecast(obj)
-})
 
-
-async function extTempTime(obj, n) {
-  const data = await obj
-  const arb = []
-  if (n == 'temp') {
-    for (let i = 0; i < 6; i++) {
-      arb.push(data[i].temp);
-    }
-    console.log(arb)
-    return arb
-  } else if (n == 'time') {
-    for (let i = 0; i < 6; i++) {
-      let formattedTime = formatISO9075(new Date(data[i].time), { representation: 'time' })
-      console.log(formattedTime)
-      arb.push(formattedTime);
-    }
-    return arb
-  }
-}
-
-export async function displayHourlyForecast(obj) {
-  const hourlyObj = await obj
-  const hourlyTemp = await extTempTime(hourlyObj, 'temp')
-  const hourlyTime = await extTempTime(hourlyObj, 'time')
-
-  const canvas = document.getElementById('myChart')
-  const ctx = canvas.getContext('2d')
-  if (canvas) {
-    canvas.remove()
-  }
-  const xcanvas = document.createElement('canvas')
-  console.log(xcanvas)
-  xcanvas.setAttribute('id', 'myChart')
-  currHourlyChart.appendChild(xcanvas)
-  const ctx2 = xcanvas.getContext('2d')
-
-  const myChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: hourlyTime,
-      datasets: [{
-        label: 'Hourly Temperature',
-        data: hourlyTemp,
-        borderRadius: 10,
-        borderWidth: 1,
-        // barThickness: 10,
-        backgroundColor: [
-          'rgba(255, 99, 132, )',
-          'rgba(54, 162, 235, )',
-          'rgba(255, 206, 86, )',
-          'rgba(75, 192, 192, )',
-          'rgba(153, 102, 255,)',
-          'rgba(255, 159, 64, )'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: 'white',
-            font: {
-            }
-          }
-        }
-      },
-      layout: {
-        padding: {
-          right: 70,
-          left: 50
-        }
-      },
-      scales: {
-        y: {
-          ticks: {
-            color: 'white',
-          },
-          beginAtZero: true
-        },
-        x: {
-
-          ticks: {
-            color: 'white',
-          },
-        }
-      }
-    }
-  });
-  Chart.defaults.font.size = 16;
-  // Chart.defaults.global.defaultFontColor = "#0000";
-}
 
