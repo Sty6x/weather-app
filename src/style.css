@@ -230,6 +230,9 @@ p#description{
   background-color: #3A3844;
   border: 2px var(--mid-black) solid;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #daily{
@@ -298,4 +301,7 @@ background-image: url('./resources/img/snow/sleet.png');
 }
 .is-light-drizzle{
  background-image: url('./resources/img/drizzle/drizzle.png');
+}
+
+#current-hourly-chart{
 }
