@@ -18,7 +18,7 @@ export async function getCurrentWeather(input) {
       const preLon = geoLocation.lon.toPrecision(geoLocation.lon.length)
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${preLat}&lon=${preLon}&units=metric&appid=fdc03d483993fc606c94afc7b9d4a3d6`, { mode: 'cors' })
       const weatherData = await weatherResponse.json()
-      console.log(weatherData)
+      // console.log(weatherData)
       const { main: { temp, temp_max, temp_min, humidity, feels_like, pressure }, name, sys: { country }, visibility, weather: [{ main, description }], wind: { deg, speed }
       } = weatherData
       return {
@@ -115,6 +115,7 @@ export async function getHourlyForecast(input) {
       const { app_temp, timestamp_local, weather: { description } } = forecastData[i]
       relevantDataHrs[i] = { temp: app_temp, time: timestamp_local, weather: description }
     }
+    console.log(relevantDataHrs)
     return relevantDataHrs
 
   } catch (error) {

@@ -1,5 +1,6 @@
-import { format } from 'date-fns'
+import { format, hoursToMinutes } from 'date-fns'
 import Chart from 'chart.js/auto';
+import PubSub from 'pubsub-js'
 const city = document.getElementById('city')
 const temp = document.getElementById('temperature')
 const desc = document.getElementById('description')
@@ -12,12 +13,7 @@ const deg = document.getElementById('low-inf-0-val')
 const vis = document.getElementById('low-inf-2-val')
 const spd = document.getElementById('low-inf-1-val')
 const dailyCont = document.getElementById('daily-list-cont')
-// const hourlyChart = document.getElementById('current-hourly-chart')
-// const impCont = document.getElementById('current-cont')
 const canvas = document.getElementById('myChart')
-// canvas.setAttribute('id', 'myChart')
-// impCont.children[0].after(canvas)
-const ctx = canvas.getContext('2d')
 const temps = [temp, maxTemp, minTemp]
 const thunderStormCD = [200, 201, 202, 230, 231, 232, 233]
 const lightDrizzleCD = [300, 301, 302]
@@ -29,6 +25,7 @@ const fogsCD = [700, 711, 721, 731, 741, 751]
 const clearSkyCD = 800
 const fewClouds = [801, 802, 803]
 const OCCD = 804
+const ctx = canvas.getContext('2d')
 
 const days = 7
 function createDailyCards(num) {
@@ -157,45 +154,61 @@ async function dailyCardsWeatherCD() {
     }
   })
 }
+PubSub.subscribe('getData', (mes, obj) => {
+  displayHourlyForecast(obj)
+})
+function extTempTime(obj, n) {
+  const arb = []
+  if (n == 'temp') {
+    for (let i = 0; i < obj.length; i++) {
+      arb.push(obj[i].temp);
+    }
+    return arb
+  }
+}
+export async function displayHourlyForecast(obj) {
+  const hourlyObj = await obj
 
-const myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['a', 'b', 'c', 'd'],
-    datasets: [{
-      label: 'Hourly Temperature',
-      data: [10, 23, 4, 5],
-      borderRadius: 10,
-      borderWidth: 9,
-      // barThickness: 10,
-      backgroundColor: [
-        'rgba(255, 99, 132, )',
-        'rgba(54, 162, 235, )',
-        'rgba(255, 206, 86, )',
-        'rgba(75, 192, 192, )',
-        'rgba(153, 102, 255,)',
-        'rgba(255, 159, 64, )'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-    }]
-  },
-  options: {
-
-    layout: {
-      // padding: 200
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['a', 'b', 'c', 'd'],
+      datasets: [{
+        label: 'Hourly Temperature',
+        data: [10, 23, 4, 5],
+        borderRadius: 10,
+        borderWidth: 9,
+        // barThickness: 10,
+        backgroundColor: [
+          'rgba(255, 99, 132, )',
+          'rgba(54, 162, 235, )',
+          'rgba(255, 206, 86, )',
+          'rgba(75, 192, 192, )',
+          'rgba(153, 102, 255,)',
+          'rgba(255, 159, 64, )'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+      }]
     },
-    scales: {
-      y: {
-        beginAtZero: true
+    options: {
+
+      layout: {
+        // padding: 200
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
-  }
-});
+  });
+
+}
 
