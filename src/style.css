@@ -192,7 +192,7 @@ p#description{
 }
 
 #detail-curr-cont{
-  width: 40%;
+  width: 25%;
   height:  450px;
   display: flex;
   flex-direction: column;
@@ -213,8 +213,9 @@ p#description{
 #lower-extra-inf{
   display: flex;
   justify-content: space-between;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 30px;
+  gap: 10px;
 }
 #lower-extra-inf p > span{
   display: flex;
@@ -301,4 +302,3 @@ background-image: url('./resources/img/snow/sleet.png');
 .is-light-drizzle{
  background-image: url('./resources/img/drizzle/drizzle.png');
 }
-
