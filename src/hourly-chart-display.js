@@ -51,19 +51,33 @@ export async function displayHourlyForecast(obj, input) {
       data: {
         labels: hourlyTime,
         datasets: [{
-          label: '° per hour',
+          label: 'Temp in Celcius',
           data: hourlyTemp,
           // borderRadius: 10,
           borderWidth: 1,
           // barThickness: 10,
-          backgroundColor: [
-            'rgba(255, 99, 132, )',
-            'rgba(54, 162, 235, )',
-            'rgba(255, 206, 86, )',
-            'rgba(75, 192, 192, )',
-            'rgba(153, 102, 255,)',
-            'rgba(255, 159, 64, )'
+          fill: true,
+          backgroundColor: 'rgba(255,255,245, .2)',
+
+          pointRadius: 10,
+          pointBackgroundColor: [
+
+            'rgba(255, 99, 132, .4)',
+            'rgba(54, 162, 235, .4)',
+            'rgba(255, 206, 86, .4)',
+            'rgba(75, 192, 192, .4)',
+            'rgba(153, 102, 255, .4)',
+            'rgba(255, 159, 64, .4)'
           ],
+
+          // backgroundColor: [
+          //   'rgba(255, 99, 132, )',
+          //   'rgba(54, 162, 235, )',
+          //   'rgba(255, 206, 86, )',
+          //   'rgba(75, 192, 192, )',
+          //   'rgba(153, 102, 255,)',
+          //   'rgba(255, 159, 64, )'
+          // ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
@@ -75,6 +89,7 @@ export async function displayHourlyForecast(obj, input) {
         }]
       },
       options: {
+
         plugins: {
           legend: {
             labels: {
