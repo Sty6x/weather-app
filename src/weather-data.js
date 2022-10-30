@@ -85,7 +85,7 @@ async function hourlyForecastAPI(input) {
 }
 
 
-export async function dailyForecastAPI(input) {
+async function dailyForecastAPI(input) {
   const isDOM = el => el instanceof Element
   try {
     if (isDOM(input)) {
@@ -115,7 +115,6 @@ export async function getHourlyForecast(input) {
       const { app_temp, timestamp_local, weather: { description } } = forecastData[i]
       relevantDataHrs[i] = { temp: app_temp, time: timestamp_local, weather: description }
     }
-    // console.log(relevantDataHrs)
     return relevantDataHrs
 
   } catch (error) {

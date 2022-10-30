@@ -1,17 +1,8 @@
-// import * as Weather from './weather-data'
-// import PubSub from 'pubsub-js'
 import { formatISO9075 } from 'date-fns'
 import Chart from 'chart.js/auto';
 const currHourlyChart = document.getElementById('current-hourly-chart')
 
-// PubSub.subscribe('userInput', (mes, input) => {
-//   console.log('hourly forecast sent', mes)
-//   displayHourlyForecast(Weather.getHourlyForecast, input)
-// })
-
-
 async function extTempTime(obj, type) {
-  console.log(obj)
   const arb = []
   if (type == 'temp') {
     for (let i = 0; i < obj.length; i++) {
@@ -21,7 +12,6 @@ async function extTempTime(obj, type) {
   } else if (type == 'time') {
     for (let i = 0; i < obj.length; i++) {
       let formattedTime = formatISO9075(new Date(obj[i].time), { representation: 'time' })
-      console.log(formattedTime)
       let newTime = formattedTime.slice(0, 5)
       arb.push(newTime);
     }
@@ -37,7 +27,6 @@ export async function displayHourlyForecast(obj, input) {
 
   Promise.all([hourlyObj, hourlyTime]).then(() => {
     const canvas = document.getElementById('myChart')
-    // const ctx = canvas.getContext('2d')
     if (canvas) {
       canvas.remove()
     }

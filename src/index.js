@@ -36,14 +36,6 @@ function sendDataAccross(e) {
   })
 }
 
-userInput.addEventListener('keypress', e => {
-  sendDataAccross(e).then((response) => {
-    temperatureHead.setAttribute('class', 'isC')
-    PubSub.publish('userInput', userInput)
-    return response
-  }).catch(er => console.log(er))
-})
-
 
 function defaultNoAccessUserLoc(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -69,13 +61,22 @@ window.onload = function() {
   userCurrentWeather(Display)
 }
 
+userInput.addEventListener('keypress', e => {
+  sendDataAccross(e).then((response) => {
+    temperatureHead.setAttribute('class', 'isC')
+    PubSub.publish('userInput', userInput)
+    return response
+  }).catch(er => console.log(er))
+})
+
 PubSub.subscribe('userInput', async (mess, data) => {
-  Weather.getHourlyForecast(data)
-  Promise.all([Display.displayWeather(Weather.getCurrentWeather, data),
-  Display.displayDailyForecast(Weather.getDailyForecast, data)],
+  Promise.all([
+    Display.displayWeather(Weather.getCurrentWeather, data),
+    Display.displayDailyForecast(Weather.getDailyForecast, data),
     HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, data)
-  ).then(() => {
-  }).catch(e => {
+  ]).catch(e => {
     console.log(e)
   })
 })
+
+
