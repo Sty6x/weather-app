@@ -92,7 +92,9 @@ export async function displayHourlyForecast(obj, input) {
         layout: {
           padding: {
             right: 50,
-            left: 30
+            left: 30,
+            top: 30,
+            bottom: 30
           }
         },
         scales: {
