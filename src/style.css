@@ -169,7 +169,8 @@ to{
   background-position: center;
   filter: invert(26%) sepia(40%) saturate(5592%) hue-rotate(349deg) brightness(80%) contrast(98%);
   animation-name: loading;
-  animation-duration: 2000ms;
+  animation-duration: 2000ms; 
+  animation-iteration-count: infinite;
 }
 #weather-cont{
   display: flex;
