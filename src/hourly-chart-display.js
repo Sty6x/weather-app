@@ -24,7 +24,10 @@ export async function displayHourlyForecast(obj, input) {
   const hourlyObj = await obj(input)
   const hourlyTemp = await extTempTime(hourlyObj, 'temp')
   const hourlyTime = await extTempTime(hourlyObj, 'time')
-
+  // const legendTemp = hourlyTemp.map(temp => {
+  //   return `${temp} °C`
+  // })
+  // console.log(legendTemp)
   Promise.all([hourlyObj, hourlyTime]).then(() => {
     const canvas = document.getElementById('myChart')
     if (canvas) {
@@ -41,7 +44,7 @@ export async function displayHourlyForecast(obj, input) {
       data: {
         labels: hourlyTime,
         datasets: [{
-          label: 'Temp in Celcius',
+          label: 'Temperature',
           data: hourlyTemp,
           // borderRadius: 10,
           borderWidth: 1,

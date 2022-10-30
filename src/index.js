@@ -28,15 +28,6 @@ main.addEventListener('click', e => {
 })
 
 
-function sendDataAccross(e) {
-  return new Promise((resolve) => {
-    if (e.key == 'Enter') {
-      resolve(userInput)
-    }
-  })
-}
-
-
 function defaultNoAccessUserLoc(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
   Display.displayWeather(Weather.getCurrentWeather, { lat: 40.730610, lon: -73.935242 })
@@ -61,21 +52,42 @@ window.onload = function() {
   userCurrentWeather(Display)
 }
 
+function sendDataAccross(e) {
+  return new Promise((resolve) => {
+    if (e.key == 'Enter') {
+      resolve(userInput)
+    }
+  })
+}
+
+
 userInput.addEventListener('keypress', e => {
   sendDataAccross(e).then((response) => {
     temperatureHead.setAttribute('class', 'isC')
     PubSub.publish('userInput', userInput)
+    userInput.checkValidity()
+    userInput.setCustomValidity('')
     return response
   }).catch(er => console.log(er))
 })
 
 PubSub.subscribe('userInput', async (mess, data) => {
+  console.log('Loading...')
   Promise.all([
+    Weather.getDailyForecast(data),
     Display.displayWeather(Weather.getCurrentWeather, data),
     Display.displayDailyForecast(Weather.getDailyForecast, data),
     HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, data)
-  ]).catch(e => {
+  ]).then(() => {
+    console.log('Loading Complete')
+  }).catch(e => {
     console.log(e)
+    if (userInput == '') {
+      userInput.setCustomValidity('Please Type In a City')
+    } else {
+      userInput.setCustomValidity('City Does Not Exist')
+    }
+    userInput.reportValidity()
   })
 })
 

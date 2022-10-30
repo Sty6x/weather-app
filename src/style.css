@@ -112,6 +112,26 @@ header{
   width: 30px;
 }
 
+input[type='search']{
+  padding: 4px 11px;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-family: Poppins;
+  border: 1px solid green;
+  transition: border-color 200ms ease-in-out();
+}
+input[type='search'],
+input[type='search']:focus{
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+input[type='search']:invalid{
+  padding: 4px 11px;
+  /* border: 2px solid red; */
+  border: 1px solid red;
+}
 
 #weather-cont{
   display: flex;
