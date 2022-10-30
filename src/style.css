@@ -78,8 +78,10 @@ main{
   height: 100%;
   /* width: 100%; */
   flex-direction: column;
-  background-color: var(--blue-yonder);
-  background-image: url('./resources/img/bg/forest-mountain-cloudy-valley.png');
+  background-color: #B8E8FC;
+  background-image: url('./resources/img/bg/wp11058374-gruvbox-wallpapers.png');
+  /* background-position: center; */
+  background-repeat: repeat;
 }
 
 header{
@@ -120,6 +122,8 @@ header{
   margin-bottom: 5em;
   gap: 70px;
   border-radius: 10px;
+  box-shadow: 15px 5px 10px 10px rgba(0,0,0,.5);
+  /* background-color:#FF9551; */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -129,15 +133,23 @@ header{
   width: 80em;
   height: 100%;
   justify-content: space-between;
-  /* padding: 2em 3em 2em 3em; */
   gap: 40px;
  }
 
 #imp-details{
   display: flex;
   flex-direction: column;
-  color: white;
+  color: #689d6a;
   gap: 5px;
+}
+
+#detail-curr-cont{
+  width: 25%;
+  height:  450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #282828;
 }
 
 
@@ -165,7 +177,7 @@ header{
   content: '';
   background-image: url('./resources/img/arrow/arrow-up.png');
   background-size: 20px 20px;
-
+  width: 30px;
   height: 30px;
   background-position: center;
   background-repeat: no-repeat;
@@ -193,14 +205,7 @@ p#description{
   font-size: 1.2rem;
 }
 
-#detail-curr-cont{
-  width: 25%;
-  height:  450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: white;
-}
+
 
 
 #upper-extra-inf{
@@ -229,7 +234,7 @@ p#description{
 #current-hourly-chart{
   flex: 1;
   height:  100%;
-background-color: rgb(58,56,68,.5);
+  background-color: rgb(58,56,68,.5);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -245,6 +250,7 @@ background-color: rgb(58,56,68,.5);
   gap: 20px;
 }
 #daily-list-cont > li {
+  /* cursor: pointer; */
   display:flex;
   justify-content: center;
   align-items: center;
@@ -256,7 +262,13 @@ background-color: rgb(58,56,68,.5);
   border-radius: 10px;
   flex-direction: column;
   gap: 10px;
+  transition: background-color 150ms ease-in-out;
+
 }
+#daily-list-cont > li:hover{
+  background-color: #FE8019;
+  color: whitesmoke;
+} 
 
 li > h4{
   font-size: 1.4rem;
