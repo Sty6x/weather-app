@@ -181,7 +181,7 @@ to{
   margin-bottom: 5em;
   gap: 70px;
   border-radius: 10px;
-  box-shadow: 15px 5px 10px 10px rgba(0,0,0,.5);
+  box-shadow: 10px 10px 8px 10px rgba(0,0,0,.5);
   /* background-color:#FF9551; */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -266,14 +266,12 @@ p#description{
 
 
 
-
 #upper-extra-inf{
   display: flex;
   flex-direction: column;
   font-size: 1.2rem;
   gap: 25px;
 }
-
 
 
 #lower-extra-inf{
@@ -334,7 +332,7 @@ li > h4{
 }
 
 li > p{
-  font-size: 1.7em;
+  font-size: 1.2em;
 }
 li > div{
   width: 50px;

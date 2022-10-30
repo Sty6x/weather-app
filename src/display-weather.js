@@ -55,9 +55,9 @@ export async function displayWeather(dataObj, input) {
     const weatherData = await dataObj(input)
     city.textContent = `${weatherData.city}, ${weatherData.country}`;
     desc.textContent = weatherData.desc;
-    temp.textContent = `${Math.round(weatherData.temperature)}°`;
-    maxTemp.textContent = `${Math.round(weatherData.maxTemp)}°`;
-    minTemp.textContent = `${Math.round(weatherData.minTemp)}°`;
+    temp.textContent = `${Math.round(weatherData.temperature)}°C`;
+    maxTemp.textContent = `${Math.round(weatherData.maxTemp)}°C`;
+    minTemp.textContent = `${Math.round(weatherData.minTemp)}°C`;
     press.textContent = `Pressure: ${weatherData.pressure} hPa`
     humid.textContent = `Humidity: ${weatherData.humidity}%`
     feelsLike.textContent = `Feels Like: ${Math.round(weatherData.feelsLike)}°`
@@ -75,13 +75,13 @@ export async function displayWeather(dataObj, input) {
 export function convertTemp(target) {
   temps.forEach(temp => {
     let t;
-    const nSymbol = temp.textContent.slice(0, temp.textContent.length - 1)
+    const nSymbol = temp.textContent.slice(0, 2)
     if (!target.classList.contains('isC')) {
       t = nSymbol * (9 / 5) + 32
-      temp.textContent = Math.round(t) + '°'
+      temp.textContent = Math.round(t) + '°F'
     } else {
       t = 5 / 9 * (nSymbol - 32)
-      temp.textContent = Math.round(t) + '°'
+      temp.textContent = Math.round(t) + '°C'
     }
   });
 }
@@ -99,7 +99,7 @@ export async function displayDailyForecast(dataObj, input) {
       dailyCards[i].children[2].setAttribute('id', `${dailyData[i].weatherCode}`)
       const date = format(new Date(dailyData[i].time), 'E')
       dailyCards[i].firstElementChild.textContent = `${date}`
-      dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].maxTemp)}°/${Math.round(dailyData[i].minTemp)}°`
+      dailyCards[i].children[1].textContent = `${Math.round(dailyData[i].maxTemp)}°C/${Math.round(dailyData[i].minTemp)}°C`
     }
     dailyCardsWeatherCD()
   } catch (err) {
