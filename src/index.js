@@ -7,6 +7,7 @@ import PubSub from 'pubsub-js'
 const userInput = document.querySelector('input')
 const main = document.querySelector('main')
 const temperatureHead = document.getElementById('temperature')
+const loadingIcon = document.getElementById('load-icon')
 
 function changeTempClass(target) {
   if (target.classList.contains('isC')) {
@@ -73,6 +74,8 @@ userInput.addEventListener('keypress', e => {
 
 PubSub.subscribe('userInput', async (mess, data) => {
   console.log('Loading...')
+  loadingIcon.classList.remove()
+  loadingIcon.setAttribute('class', 'is-loading')
   Promise.all([
     Weather.getDailyForecast(data),
     Display.displayWeather(Weather.getCurrentWeather, data),
@@ -80,8 +83,12 @@ PubSub.subscribe('userInput', async (mess, data) => {
     HourlyChart.displayHourlyForecast(Weather.getHourlyForecast, data)
   ]).then(() => {
     console.log('Loading Complete')
+    loadingIcon.classList.remove()
+    loadingIcon.setAttribute('class', 'is-complete')
   }).catch(e => {
     console.log(e)
+    loadingIcon.classList.remove()
+    loadingIcon.setAttribute('class', 'is-complete')
     if (userInput == '') {
       userInput.setCustomValidity('Please Type In a City')
     } else {

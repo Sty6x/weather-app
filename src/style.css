@@ -51,6 +51,14 @@ a{
   color: black;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+  appearance: none;
+}
+
 @font-face{
   font-family: 'Poppins';
   src: url('./resources/woff-fonts/Poppins-Regular.woff') format('woff'),
@@ -132,7 +140,37 @@ input[type='search']:invalid{
   /* border: 2px solid red; */
   border: 1px solid red;
 }
-
+#search-cont{
+  position: relative;
+}
+@keyframes loading{
+from{
+  transform:rotate(0deg);
+  opacity: 1;
+}
+to{
+  transform:rotate(360deg);
+}
+}
+.is-complete{
+  opacity: 0;
+  transition: opacity 120ms ease-in-out();
+}
+.is-loading{
+  opacity: 1;
+  position: absolute;
+  background-image: url('./resources/img/loading/load1.png');
+  background-size: 35px 35px;
+  width: 35px;
+  height: 35px;
+  left: -40px;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(26%) sepia(40%) saturate(5592%) hue-rotate(349deg) brightness(80%) contrast(98%);
+  animation-name: loading;
+  animation-duration: 2000ms;
+}
 #weather-cont{
   display: flex;
   flex-direction: column;
